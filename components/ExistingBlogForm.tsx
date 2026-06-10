@@ -65,10 +65,12 @@ export function ExistingBlogForm({
       const payload = (await response.json()) as {
         data?: OptimizeOutput;
         error?: string;
+        hint?: string;
       };
 
       if (!response.ok || !payload.data) {
-        throw new Error(payload.error ?? "Failed to optimize blog.");
+        const message = payload.error ?? "Failed to optimize blog.";
+        throw new Error(payload.hint ? `${message} ${payload.hint}` : message);
       }
 
       onResult(payload.data, values.existingBlog);

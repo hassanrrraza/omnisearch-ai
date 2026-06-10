@@ -35,17 +35,17 @@ export async function buildOptimizeBlogPrompt(
   "faq": [
     {
       "question": "string - PAA-style question",
-      "answer": "string - 80-150 words, first sentence <=30 words"
+      "answer": "string - 2-4 concise sentences, first sentence <=30 words"
     }
   ],
   "featuredSnippet": "string - 40-60 word direct answer for the main query",
   "llmSummary": "string - 2-3 sentences for AI system comprehension",
   "schemaJsonLd": { "valid FAQPage schema JSON-LD object" },
   "optimizationReport": {
-    "seo": ["list of SEO improvements made"],
-    "aeo": ["list of AEO improvements made"],
-    "geo": ["list of GEO improvements made"],
-    "llm": ["list of LLM optimization improvements made"]
+    "seo": ["5-8 SEO improvements made"],
+    "aeo": ["5-8 AEO improvements made"],
+    "geo": ["5-8 GEO improvements made"],
+    "llm": ["5-8 LLM optimization improvements made"]
   },
   "score": {
     "seo": 0,
@@ -63,6 +63,8 @@ and LLM visibility.
 Your task: improve the provided existing blog post WITHOUT changing its core
 meaning or topic. Preserve the author's voice as much as possible while
 applying every relevant optimization rule from the guides below.
+Keep the optimized article complete and reasonably close to the original
+length unless the user's notes explicitly request expansion.
 
 ---
 SEO OPTIMIZATION GUIDE:
@@ -100,15 +102,17 @@ OPTIMIZATION RULES:
 5. Add or improve a comparison table with specific values if missing
 6. Add or improve a numbered list with 4-8 items if the content has steps
 7. Add or improve a blockquote with a standalone citable insight
-8. Add 5+ specific numeric data points if missing (ask Gemini to invent
-   plausible, clearly illustrative examples if the original has none)
+8. Add specific numeric data points only when they are present in the source
+   content or clearly labeled as illustrative examples. Do not invent
+   statistics, dates, percentages, or research claims.
 9. Add exactly 3 FAQ questions from likely PAA queries - answers must have
-   first sentence <=30 words, total 80-150 words
+   first sentence <=30 words and total 2-4 concise sentences each
 10. Add a Key Takeaways section before the FAQ
 11. Add a Featured Snippet answer block (40-60 words)
 12. Add an LLM Summary
 13. Generate FAQPage JSON-LD schema
-14. Log EVERY change made in changesLog with section, change, and reason
+14. Log the 8-12 most important changes in changesLog with section, change,
+    and reason
 15. Score the OPTIMIZED output (not the original) honestly against the
     same checklist used in the create-blog flow
 
@@ -121,8 +125,12 @@ SCORING - score the optimized output:
 
 ---
 OUTPUT RULES:
-Return ONLY a valid JSON object matching this schema.
-No markdown fences. No explanation. No preamble. Only the JSON.
+Return only one valid compact JSON object matching this schema.
+Do not wrap the JSON in markdown fences.
+Do not include comments.
+Do not include text before or after the JSON.
+Escape all newline characters inside JSON string values correctly.
+Keep long markdown content inside string values.
 
 ${outputJsonSchema}`;
 }
