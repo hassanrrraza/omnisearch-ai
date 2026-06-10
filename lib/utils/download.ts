@@ -47,6 +47,32 @@ ${body}
 </html>`;
 }
 
+export function markdownToMdx(
+  markdown: string,
+  meta: {
+    title: string;
+    slug: string;
+    seoTitle: string;
+    metaDescription: string;
+    targetKeyword: string;
+    excerpt: string;
+  }
+): string {
+  const frontmatter = `---
+title: "${escapeYamlString(meta.title)}"
+slug: "${escapeYamlString(meta.slug)}"
+seoTitle: "${escapeYamlString(meta.seoTitle)}"
+metaDescription: "${escapeYamlString(meta.metaDescription)}"
+targetKeyword: "${escapeYamlString(meta.targetKeyword)}"
+excerpt: "${escapeYamlString(meta.excerpt)}"
+date: "${new Date().toISOString().split("T")[0]}"
+---
+
+`;
+
+  return frontmatter + markdown;
+}
+
 function lineToHtml(line: string): string {
   const trimmed = line.trim();
 
@@ -94,4 +120,8 @@ function escapeHtml(value: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function escapeYamlString(value: string): string {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
 }
