@@ -12,8 +12,9 @@ export function getGeminiModel() {
   return genAI.getGenerativeModel({
     model: process.env.GEMINI_MODEL ?? "gemini-2.0-flash",
     generationConfig: {
+      temperature: 0.2,
       responseMimeType: "application/json",
-      maxOutputTokens: 8192,
+      maxOutputTokens: 16000,
     },
   });
 }
