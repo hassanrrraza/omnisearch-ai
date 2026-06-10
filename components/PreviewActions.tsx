@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   downloadFile,
   markdownToBasicHtml,
+  markdownToMdx,
 } from "@/lib/utils/download";
 
 type ScoreSet = {
@@ -128,6 +129,26 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
         type="button"
       >
         Download .html
+      </button>
+      <button
+        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
+        onClick={() =>
+          downloadFile(
+            markdownToMdx(markdown, {
+              title,
+              slug: data.slug,
+              seoTitle: data.seoTitle,
+              metaDescription: data.metaDescription,
+              targetKeyword: data.targetKeyword,
+              excerpt: data.excerpt,
+            }),
+            `${safeSlug}.mdx`,
+            "text/markdown"
+          )
+        }
+        type="button"
+      >
+        Download .mdx
       </button>
       <button
         className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
