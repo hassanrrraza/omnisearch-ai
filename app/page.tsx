@@ -36,12 +36,9 @@ export default function Home() {
           </Link>
 
           <Link
-            className="relative rounded-lg border border-neutral-200 bg-white p-6 text-left opacity-60"
+            className="group rounded-lg border border-neutral-200 bg-white p-6 text-left transition hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-sm"
             href="/optimize-blog"
           >
-            <span className="absolute right-4 top-4 rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-700">
-              Coming Soon
-            </span>
             <SparkleIcon />
             <h2 className="mt-5 text-xl font-semibold text-neutral-950">
               Optimize Existing Blog
@@ -51,7 +48,7 @@ export default function Home() {
               LLM visibility.
             </p>
             <p className="mt-6 text-sm font-medium text-neutral-900">
-              Coming in Phase 2
+              Paste → Optimized output
             </p>
           </Link>
         </section>
