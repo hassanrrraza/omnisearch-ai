@@ -1,4 +1,4 @@
-# SEO Optimization Guide — hassanr.com
+﻿# SEO Optimization Guide — [your-domain.com]
 **Version:** 1.0 · **Last Updated:** June 2026  
 **Applies to:** All blog posts under `blogs/` and the homepage  
 **Related guides:** `docs/aeo-optimization-guide.md` · `docs/geo-optimization-guide.md`
@@ -47,7 +47,7 @@ If the search returns a featured snippet from a generic source, you can displace
 
 | Location | Requirement | Notes |
 |---|---|---|
-| `<title>` tag | Primary keyword in first 60 chars | Format: `Keyword — Hassan Raza` |
+| `<title>` tag | Primary keyword in first 60 chars | Format: `Keyword — [Author Name]` |
 | `<h1>` | Primary keyword present | Can be longer — this is the visible title |
 | First paragraph | Primary keyword in first 100 words | Natural inclusion, not forced |
 | Meta description | Primary keyword once | 150-160 chars total |
@@ -69,10 +69,10 @@ If the search returns a featured snippet from a generic source, you can displace
 
 ### Title Tag
 
-**Formula:** `[Primary Keyword] [Differentiator/Year] — Hassan Raza`
+**Formula:** `[Primary Keyword] [Differentiator/Year] — [Author Name]`
 
 ```html
-<title>Prisma Migrations Production Next.js Vercel Deployment Guide — Hassan Raza</title>
+<title>Prisma Migrations Production Next.js Vercel Deployment Guide — [Author Name]</title>
 ```
 
 **Rules:**
@@ -152,7 +152,7 @@ Each H2 should be a **direct statement** (not a question) that includes a second
 
 **Why it matters:** Internal links pass "link equity" (ranking power) between pages and help Google understand your topic cluster. A well-linked cluster of posts on "FastAPI + AI" ranks better than isolated posts on the same topics.
 
-**The topic cluster model for hassanr.com:**
+**The topic cluster model for [your-domain.com]:**
 
 ```
 Cluster: FastAPI/Python AI Systems
@@ -229,22 +229,22 @@ Add this as a 4th item in the `@graph` array. Do not replace existing schema typ
 ```xml
 <!-- Priority hierarchy — enforce consistently -->
 <url>
-  <loc>https://hassanr.com/</loc>
+  <loc>https://[your-domain.com]/</loc>
   <priority>1.0</priority>          <!-- Homepage -->
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://hassanr.com/blogs/</loc>
+  <loc>https://[your-domain.com]/blogs/</loc>
   <priority>0.9</priority>          <!-- Blog index -->
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://hassanr.com/blogs/your-post.html</loc>
+  <loc>https://[your-domain.com]/blogs/your-post.html</loc>
   <priority>0.8</priority>          <!-- All blog posts — uniform priority -->
   <changefreq>monthly</changefreq>
   <lastmod>YYYY-MM-DD</lastmod>
   <image:image>                     <!-- Required for Google Image Search -->
-    <image:loc>https://hassanr.com/assets/images/blog/blog-slug.webp</image:loc>
+    <image:loc>https://[your-domain.com]/assets/images/blog/blog-slug.webp</image:loc>
     <image:title>Post Title</image:title>
   </image:image>
 </url>
@@ -262,7 +262,7 @@ Add this as a 4th item in the `@graph` array. Do not replace existing schema typ
 
 Static HTML has a massive CWV advantage over JavaScript-heavy frameworks. These are the targets:
 
-| Metric | Target | hassanr.com Status | Notes |
+| Metric | Target | [your-domain.com] Status | Notes |
 |---|---|---|---|
 | LCP (Largest Contentful Paint) | < 2.5s | ✅ Static HTML loads fast | |
 | INP (Interaction to Next Paint) | < 200ms | ✅ Minimal JS | INP replaced FID as a Core Web Vital in March 2024. FID is no longer tracked. |
@@ -291,7 +291,7 @@ User-agent: Google-Extended # Google AI
 User-agent: PerplexityBot  # Perplexity
 User-agent: Applebot       # Apple Intelligence
 # ... (15+ bots currently whitelisted)
-Sitemap: https://hassanr.com/sitemap.xml
+Sitemap: https://[your-domain.com]/sitemap.xml
 ```
 
 ### llms.txt — Agentic Browsing Signal (New in 2026)
@@ -356,21 +356,21 @@ Google's quality guidelines use **E-E-A-T**: Experience, Expertise, Authoritativ
 
 **What it is:** Reputation signals — who recognizes your expertise beyond the page itself.
 
-**Current signals on hassanr.com:**
+**Current signals on [your-domain.com]:**
 - IEEE publication link in the Person schema `sameAs` field
 - LinkedIn profile with project work history
 - GitHub profile with public repositories
 - Blog posts that reference published tools (Prisma 7, Next.js 16)
 
 **To strengthen:**
-- Cross-post to Dev.to with canonical back to hassanr.com (backlink + distribution)
+- Cross-post to Dev.to with canonical back to [your-domain.com] (backlink + distribution)
 - GitHub repos referenced in posts (real code = authority signal)
 - LinkedIn posts with links back to blog posts (social signals + potential backlinks)
 - IEEE paper link in blog posts where AI/computer vision is mentioned (external authority)
 - The blog post cross-referencing pattern (metric consistency across 5+ posts) signals
   a coherent, verifiable body of work — not a one-off article
 - Perplexity/ChatGPT citations of your content (GEO success) themselves signal authority
-  to Google when they drive branded search ("hassanr.com AI engineer")
+  to Google when they drive branded search ("[your-domain.com] AI engineer")
 
 ### Trustworthiness
 

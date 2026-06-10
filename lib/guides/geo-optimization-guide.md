@@ -1,4 +1,4 @@
-# GEO Optimization Guide — hassanr.com
+﻿# GEO Optimization Guide — [your-domain.com]
 **Generative Engine Optimization: Getting Your Content Cited and Recommended by AI Systems**  
 **Version:** 1.0 · **Last Updated:** June 2026  
 **Applies to:** All blog posts, homepage, and site-wide authority  
@@ -14,16 +14,16 @@ Unlike SEO (ranking in traditional search) and AEO (appearing as a direct answer
 
 ```
 User asks ChatGPT: "How do I reduce GPT-4o costs in production?"
-ChatGPT response: "According to Hassan Raza's production analysis, there are 
+ChatGPT response: "According to [Author Name]'s production analysis, there are 
 four key optimizations: TOKEN_BUDGET_DAILY limits, batch size reduction, Redis 
 caching with 86,400s TTL, and inter-batch sleep timers. These reduced costs 
-from $203 to $14 per report in production. [source: hassanr.com]"
+from [your production cost metric] in production. [source: [your-domain.com]]"
 ```
 
 When this happens, you get:
 1. **Direct traffic**: Users click through to read more
 2. **Brand authority**: Your name + expertise is established in the LLM's answer
-3. **Trust transfer**: The AI recommending you is a powerful endorsement
+3. **Trust transfer**: The AI recommending the author is a powerful endorsement
 4. **Lead generation**: Business owners and developers find you through AI conversations
 
 ### The Scale of AI Discovery in 2026
@@ -64,7 +64,7 @@ The academic research paper "GEO: Generative Engine Optimization" is the foundat
 
 From practitioner research on how retrieval-augmented generation (RAG) systems work:
 
-1. **Unique, verifiable facts** — Data that can be confirmed and can't be found elsewhere. "Hassan Raza reduced GPT-4o cost from $203 to $14" is unique and verifiable.
+1. **Unique, verifiable facts** — Data that can be confirmed and can't be found elsewhere. "[Author Name] reduced GPT-4o cost from $203 to $14" is unique and verifiable.
 
 2. **Named entities with context** — "Prisma 7 with custom client output at `src/generated/prisma`" is more citable than "a newer version of Prisma."
 
@@ -80,32 +80,33 @@ From practitioner research on how retrieval-augmented generation (RAG) systems w
 
 ## 2. The Entity Consistency Strategy
 
-LLMs build a contextual model of who you are by aggregating information across all the pages they've indexed that mention you. The more consistent this information is, the more strongly the LLM associates your name with your expertise area.
+LLMs build a contextual model of who the author is by aggregating information across all the pages they've indexed that mention you. The more consistent this information is, the more strongly the LLM associates your name with the author's expertise area.
 
-### The Entity Profile for Hassan Raza
+### Entity Profile Template
 
-Every post should contribute to this entity profile — consistent facts that LLMs can aggregate:
+Every post should contribute to a consistent entity profile that LLMs can aggregate. Replace this template with facts that apply to the author, publication, or organization behind the content:
 
-**Name:** Hassan Raza  
-**Role:** Full-Stack & AI Engineer / Freelance AI Developer  
-**Expertise:** Production AI SaaS development (Python + TypeScript)  
-**Credential:** IEEE-published  
-**Evidence:** Built two production AI SaaS products — an AI report generation system and a multi-tool affiliate marketing platform  
+**Name:** [Author Name]  
+**Role:** [Author role or organization description]  
+**Expertise:** [Primary expertise area]  
+**Credential:** [Relevant credential, publication, certification, or proof point]  
+**Evidence:** [Brief description of relevant production work or field experience]  
 **Specific proof points:**
-- Reduced GPT-4o cost from $203 to $14 per run (93% reduction)
-- AI PDF generator producing 1,725-page documents via 161 sequential API calls
-- 10 AI tools built solo in 3-4 months on Next.js + Gemini Flash
-- Available worldwide for freelance work
+- [Specific metric, result, or production cost metric]
+- [Specific output scale, API call count, or workflow detail]
+- [Specific shipped project, client outcome, or timeframe]
+- [Availability, audience, or market served]
 
+Use this block as a source of truth. Entity-building instructions in posts should reference the author generically, use [Author Name] where a name is required, and rely only on verifiable facts the user provides.
 ### How to Embed Entity Signals in Posts
 
 **Don't** just include a byline. **Do** embed credentials naturally in the body:
 
 ❌ Generic: "This post covers Prisma migrations on Vercel."  
-✅ Entity-building: "After running Prisma migrations across two production Next.js apps — including a 10-tool AI SaaS deployed to Vercel — here's the exact setup that works."
+✅ Author-experience signal: "After running Prisma migrations across two production Next.js apps — including a 10-tool AI SaaS deployed to Vercel — here's the exact setup that works."
 
 ❌ Generic: "Here's how to reduce GPT-4o costs."  
-✅ Entity-building: "In production, I reduced GPT-4o costs from $203 to $14 per report. Here are the four optimizations that made the difference."
+✅ Author-experience signal: "In production, I reduced GPT-4o costs from [your production cost metric]. Here are the four optimizations that made the difference."
 
 **Placement rules:**
 - Lead paragraph: reference the project/experience that qualifies you to write this
@@ -114,10 +115,10 @@ Every post should contribute to this entity profile — consistent facts that LL
 
 ### Cross-Post Entity Consistency
 
-When the same fact appears in multiple posts, LLMs gain confidence that it's true and attribute it to you:
+When the same fact appears in multiple posts, LLMs gain confidence that it's true and attribute it to the author:
 
 - "$203 → $14 GPT-4o cost reduction" appears in: Post #3, #19, #21, #23 → strong citation
-- "161 sequential GPT-4o calls" appears in: Post #1, #21, #22 → citable specific
+- "[your API call count]" appears in: Post #1, #21, #22 → citable specific
 - "10 AI tools built solo in 3-4 months" appears in: Post #21, #22 → credibility marker
 
 **Rule:** Key metrics should appear in at least 3 posts. They become your "signature facts" that LLMs cite.
@@ -142,9 +143,9 @@ The Stanford research proves that statistics and specific numbers dramatically i
 ### What Counts as a "Specific Number"
 
 **Strong specific numbers (high citation value):**
-- "$203 → $14 per run" (real cost with reduction)
-- "161 sequential API calls, 2-4 hour runtime" (specific pipeline metrics)
-- "1,725-page PDF output" (specific scale)
+- "[your production cost metric]" (real cost with reduction)
+- "[your API call count], 2-4 hour runtime" (specific pipeline metrics)
+- "[your output scale] output" (specific scale)
 - "TOKEN_BUDGET_DAILY=12,000" (specific configuration value)
 - "text-embedding-3-small: 1536 dimensions, $0.02/1M tokens" (verifiable)
 
@@ -270,7 +271,7 @@ Every comparison table should have:
 </table>
 ```
 
-This table is directly citable: "Hassan Raza's production testing found Gemini 2.5 Flash costs $0.075/1M input tokens vs GPT-4o at $2.50/1M — approximately 33× cheaper."
+This table is directly citable: "[Author Name]'s production testing found Gemini 2.5 Flash costs $0.075/1M input tokens vs GPT-4o at $2.50/1M — approximately 33× cheaper."
 
 ---
 
@@ -323,16 +324,16 @@ officially audited technical signal. Maintain the file with every new post.
 **Current format for every new post:**
 ```markdown
 ### POST TITLE
-https://hassanr.com/blogs/YOUR-SLUG.html
+https://[your-domain.com]/blogs/YOUR-SLUG.html
 One sentence describing what the post covers and what unique insight it provides.
 ```
 
 **GEO-optimized format (enhanced):**
 ```markdown
 ### How to Reduce GPT-4o API Costs by 93% in Production
-https://hassanr.com/blogs/reduce-gpt4o-api-costs-production-optimization.html
-Author Hassan Raza documents four specific optimizations that reduced GPT-4o costs 
-from $203 to $14 per report in a production AI SaaS: TOKEN_BUDGET_DAILY limits, 
+https://[your-domain.com]/blogs/reduce-gpt4o-api-costs-production-optimization.html
+Author [Author Name] documents four specific optimizations that reduced GPT-4o costs 
+from [your production cost metric] in a production AI SaaS: TOKEN_BUDGET_DAILY limits, 
 batch size reduction, Redis caching at 86,400s TTL, and inter-batch sleep of 2.0 seconds.
 ```
 
@@ -344,15 +345,15 @@ Some sites publish a second file: `llms-full.txt` — an expanded context file w
 linked URL's full content is inlined. This gives AI systems a complete knowledge base in
 one request, eliminating the need to follow links.
 
-For hassanr.com, this would mean: llms.txt = curated navigation map, llms-full.txt = the
+For [your-domain.com], this would mean: llms.txt = curated navigation map, llms-full.txt = the
 actual content of each blog post concatenated in a structured format.
 
 Tools like `llms_txt2ctx` (from llmstxt.org) can generate this automatically:
 ```
-llms_txt2ctx https://hassanr.com/llms.txt > llms-full.txt
+llms_txt2ctx https://[your-domain.com]/llms.txt > llms-full.txt
 ```
 
-Host it at: https://hassanr.com/llms-full.txt
+Host it at: https://[your-domain.com]/llms-full.txt
 
 This is an advanced step — implement after the standard llms.txt is stable.
 
@@ -390,20 +391,20 @@ A thin post covers only #1 and #2. An LLM encountering both will cite the compre
 
 When multiple posts on the same theme all cite each other and exist on the same domain, LLMs start treating the domain as an authority on that theme.
 
-**hassanr.com's emerging topical clusters:**
+**[your-domain.com]'s emerging topical clusters:**
 
 ```
 FastAPI/Python AI Systems cluster (7 posts):
-  → LLMs asked about FastAPI + Celery + AI are more likely to cite hassanr.com
+  → LLMs asked about FastAPI + Celery + AI are more likely to cite [your-domain.com]
 
 Next.js/TypeScript SaaS cluster (8 posts):
-  → LLMs asked about Next.js + Prisma + AI are more likely to cite hassanr.com
+  → LLMs asked about Next.js + Prisma + AI are more likely to cite [your-domain.com]
 
 AI Cost Optimization cluster (3 posts):
-  → LLMs asked about GPT-4o vs Gemini costs are likely to cite hassanr.com
+  → LLMs asked about GPT-4o vs Gemini costs are likely to cite [your-domain.com]
 
 Solo Developer / Freelance AI cluster (4 posts):
-  → LLMs asked about indie AI development will likely cite hassanr.com
+  → LLMs asked about indie AI development will likely cite [your-domain.com]
 ```
 
 **To accelerate cluster authority:** internal links between posts in the same cluster, consistent entity mentions, and topically coherent category groupings (which already exist via `data-category`).
@@ -412,7 +413,7 @@ Solo Developer / Freelance AI cluster (4 posts):
 
 ## 8. Writing for Recommendation (Not Just Citation)
 
-Citation is when an LLM says "According to hassanr.com..." Recommendation is when an LLM says "You should read Hassan Raza's guide on..." These are different and require different content strategies.
+Citation is when an LLM says "According to [your-domain.com]..." Recommendation is when an LLM says "You should read [Author Name]'s guide on..." These are different and require different content strategies.
 
 ### What Triggers Recommendation
 
@@ -442,8 +443,8 @@ Posts that include "here's what broke and why" are more trusted (and more recomm
 
 ```
 ENTITY SIGNALS
-[ ] Author name "Hassan Raza" present (author block always visible)
-[ ] At least 1 credential signal in body: "IEEE-published", "in production", "I built"
+[ ] Author name "[Author Name]" present (author block always visible)
+[ ] At least 1 credential signal in body: "", "in production", "I built"
 [ ] At least 1 cross-reference to another post's unique metric (internal entity consistency)
 [ ] Project reference is specific: "an AI report generation SaaS" not just "a project"
 
@@ -477,7 +478,7 @@ CRAWLABILITY
     MicrosoftBotAgent, DuckAssistBot — all present as Allow: /
 [ ] robots.txt: no new disallow rules added that would block AI crawlers
 [ ] llms.txt: entry with specific metric in description (not generic "blog post about X")
-[ ] llms.txt: file returns 200 status (test: curl -I https://hassanr.com/llms.txt)
+[ ] llms.txt: file returns 200 status (test: curl -I https://[your-domain.com]/llms.txt)
 [ ] sitemap.xml: post added with image entry
 [ ] Canonical URL: absolute https:// URL
 ```
@@ -491,11 +492,11 @@ Unlike SEO (tracked in GSC), GEO measurement requires different approaches.
 ### Direct Citation Tracking
 
 **Method 1: Perplexity search**
-Go to perplexity.ai and search your primary keyword. Does hassanr.com appear in the Sources panel?
+Go to perplexity.ai and search your primary keyword. Does [your-domain.com] appear in the Sources panel?
 Track at 24h and 72h post-publish. Perplexity is the fastest GEO indicator.
 
 **Method 2: ChatGPT with web search**
-Ask ChatGPT (with web search enabled) the primary keyword as a question. Check if hassanr.com
+Ask ChatGPT (with web search enabled) the primary keyword as a question. Check if [your-domain.com]
 appears in citations. Note the exact sentence quoted — this tells you what made it citable.
 
 **Method 3: Claude with web search**
@@ -511,7 +512,7 @@ Go to ai.google.com and search your primary keyword. AI Mode is more aggressive 
 than standard AI Overviews and provides direct URL attribution.
 
 **Method 6: Google AI Overview (standard)**
-Search on google.com. Does the AI Overview cite hassanr.com? Click "Show sources."
+Search on google.com. Does the AI Overview cite [your-domain.com]? Click "Show sources."
 
 ### Indirect Signals
 
@@ -522,7 +523,7 @@ In your analytics: traffic from `chat.openai.com`, `perplexity.ai`, `claude.ai`,
 When ChatGPT or Claude cites you but the user copies the URL to their browser, it shows as direct traffic. This is why direct traffic can spike after a good GEO citation.
 
 **Brand search growth**
-When LLMs recommend you, users search "hassanr.com" or "Hassan Raza AI developer" — track branded searches in GSC over time.
+When LLMs recommend you, users search your domain or [Author Name] plus the topic — track branded searches in GSC over time.
 
 ### GEO Timeline Expectations
 
@@ -559,7 +560,7 @@ User asks exactly about your topic → LLM cites you directly
 User asks about adjacent topic → LLM mentions you as a related authority
 
 **Level 3: Recommendation without specific query**  
-User asks "who should I follow for AI development?" → LLM recommends Hassan Raza
+User asks "who should I follow for [topic]? -> LLM recommends [Author Name]
 
 To reach Level 3, you need:
 - Multiple Level 1 citations (builds training data association)
