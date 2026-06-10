@@ -123,6 +123,71 @@ Next.js API route. The key is only read server-side from `.env.local`.
 
 ---
 
+## File Mode (No Browser Required)
+
+Drop a JSON file in `/input`, run one command, and get your full output in
+`/output`.
+
+**Setup:**
+
+```bash
+cp input/new-blog.example.json input/new-blog.json
+# Edit new-blog.json with your blog details
+```
+
+**Generate:**
+
+```bash
+npm run generate
+```
+
+**Output files written to `/output`:**
+
+```text
+output/
+your-slug.md                  ← The blog post
+your-slug.json                ← Full output bundle
+your-slug-metadata.json       ← SEO metadata
+your-slug-schema.json         ← FAQPage JSON-LD
+```
+
+**Terminal output includes scores:**
+
+```text
+--- Optimization Scores ---
+SEO:     88/100
+AEO:     91/100
+GEO:     85/100
+LLM:     89/100
+Overall: 88/100
+```
+
+**Optimize an existing blog:**
+
+```bash
+cp input/existing-blog.example.md input/existing-blog.md
+# Paste your blog content into existing-blog.md
+cp input/optimize-config.example.json input/optimize-config.json
+# Fill in keyword, audience, goal
+npm run optimize:file
+```
+
+---
+
+## CLI Mode
+
+```bash
+# From inside the project directory:
+npx omnisearch-ai new
+npx omnisearch-ai optimize
+
+# Or use the npm scripts directly:
+npm run generate
+npm run optimize:file
+```
+
+---
+
 ## Customize the Optimization Engine
 
 The three `.md` files in `lib/guides/` are the knowledge base:
