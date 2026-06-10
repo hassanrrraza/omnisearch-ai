@@ -8,8 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +23,83 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.prose {
+  color: #262626;
+  line-height: 1.75;
+}
+
+.prose :where(h1, h2, h3) {
+  color: #0a0a0a;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.prose h1 {
+  font-size: 2rem;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  font-size: 1.2rem;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose table,
+.prose blockquote {
+  margin-bottom: 1rem;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #e5e5e5;
+  padding: 0.625rem;
+  text-align: left;
+}
+
+.prose th {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.prose blockquote {
+  border-left: 4px solid #171717;
+  background: #fafafa;
+  padding: 0.75rem 1rem;
+}
+
+.prose code {
+  border-radius: 0.375rem;
+  background: #f5f5f5;
+  padding: 0.125rem 0.25rem;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
 }
