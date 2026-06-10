@@ -1,4 +1,4 @@
-# AEO Optimization Guide — hassanr.com
+﻿# AEO Optimization Guide — [your-domain.com]
 **Answer Engine Optimization: Getting Your Content Into AI-Powered Answer Boxes**  
 **Version:** 1.0 · **Last Updated:** June 2026  
 **Applies to:** All blog posts under `blogs/`  
@@ -177,7 +177,7 @@ For your FAQ section, choose 3 questions that:
 **Step 5: Answer in the required format**  
 See Section 3 for exact writing rules.
 
-### PAA Research for hassanr.com Content
+### PAA Research for [your-domain.com] Content
 
 Based on the June batch primary keywords, these PAA patterns were found:
 - "How do I [action] in production?" → process/tutorial intent
@@ -299,7 +299,7 @@ For posts that contain numbered implementation steps (most technical tutorials),
 ```json
 {
   "@type": "HowTo",
-  "@id": "https://hassanr.com/blogs/YOUR-SLUG.html#howto",
+  "@id": "https://[your-domain.com]/blogs/YOUR-SLUG.html#howto",
   "name": "How to Set Up Prisma Migrations in Production on Vercel",
   "description": "Step-by-step guide to running Prisma migrations safely on Vercel without downtime.",
   "totalTime": "PT30M",
@@ -351,7 +351,7 @@ Voice queries are longer and more conversational than typed queries. "Hey Google
 }
 ```
 
-> **Implementation note for hassanr.com:** The `.blog-post__lead` class wraps the post's
+> **Implementation note for [your-domain.com]:** The `.blog-post__lead` class wraps the post's
 > opening paragraph. The `.blog-faq__body p:first-child` selects the first sentence of each
 > FAQ answer — the part that is already optimized to ≤30 words. These two selectors in the
 > speakable property target the highest-value voice-extractable content on every post.
@@ -394,8 +394,8 @@ TESTING
 [ ] Rich Results Test: FAQPage + BreadcrumbList both detected ✅
 [ ] HowTo detected if applicable ✅
 [ ] No "invalid markup" warnings in Rich Results Test
-[ ] Google AI Mode: search primary keyword at ai.google.com — is hassanr.com cited?
-[ ] Google AI Overview: search primary keyword on google.com — is hassanr.com in sources?
+[ ] Google AI Mode: search primary keyword at ai.google.com — is [your-domain.com] cited?
+[ ] Google AI Overview: search primary keyword on google.com — is [your-domain.com] in sources?
 ```
 
 ---
