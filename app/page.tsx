@@ -15,6 +15,22 @@ export default function Home() {
             Generate blog posts optimized for Google Search, AI Overviews, AEO,
             GEO, and LLM discovery - powered by your own Gemini API key.
           </p>
+
+          <div className="mt-7 flex flex-wrap justify-center gap-2">
+            {[
+              "✦ SEO Optimized",
+              "✦ AI Overview Ready",
+              "✦ GEO + LLM Optimized",
+              "✦ Gemini Powered",
+            ].map((feature) => (
+              <span
+                className="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-600"
+                key={feature}
+              >
+                {feature}
+              </span>
+            ))}
+          </div>
         </section>
 
         <section className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -53,12 +69,70 @@ export default function Home() {
           </Link>
         </section>
 
+        <section className="mt-10 rounded-lg border border-neutral-200 bg-white p-5">
+          <div className="grid gap-5 md:grid-cols-3">
+            <HowItWorksStep
+              description="Add a topic, keyword, audience, or existing article."
+              icon={<PencilIcon />}
+              title="1. Fill the form"
+            />
+            <HowItWorksStep
+              description="The server loads your guides and applies Gemini."
+              icon={<SparkleIcon small />}
+              title="2. Gemini optimizes"
+            />
+            <HowItWorksStep
+              description="Copy Markdown, metadata JSON, or download files."
+              icon={<DownloadIcon />}
+              title="3. Export your content"
+            />
+          </div>
+        </section>
+
+        <section className="mt-10 text-center">
+          <p className="text-sm text-neutral-500">
+            OmniSearch AI is free and open source.
+          </p>
+          <a
+            className="mt-2 inline-flex text-sm font-medium text-neutral-900 underline underline-offset-4 hover:opacity-70"
+            href="https://github.com/hassanrrraza/omnisearch-ai"
+            rel="noreferrer"
+            target="_blank"
+          >
+            ⭐ Star on GitHub →
+          </a>
+        </section>
+
         <p className="mt-10 text-center text-sm text-neutral-500">
           Runs 100% locally. Your API key never leaves your machine. Open source
           on GitHub.
         </p>
       </div>
     </main>
+  );
+}
+
+function HowItWorksStep({
+  description,
+  icon,
+  title,
+}: {
+  description: string;
+  icon: React.ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="flex gap-3">
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-neutral-900">
+        {icon}
+      </div>
+      <div>
+        <h2 className="text-sm font-semibold text-neutral-950">{title}</h2>
+        <p className="mt-1 text-sm leading-5 text-neutral-500">
+          {description}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -78,10 +152,10 @@ function DocumentPlusIcon() {
   );
 }
 
-function SparkleIcon() {
+function SparkleIcon({ small }: { small?: boolean }) {
   return (
     <svg
-      className="h-10 w-10 text-neutral-900"
+      className={small ? "h-5 w-5" : "h-10 w-10 text-neutral-900"}
       fill="none"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -90,6 +164,37 @@ function SparkleIcon() {
       <path d="M12 3 13.8 8.2 19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
       <path d="m19 15 1 3 3 1-3 1-1 3-1-3-3-1 3-1 1-3z" />
       <path d="m5 3 .8 2.2L8 6l-2.2.8L5 9l-.8-2.2L2 6l2.2-.8L5 3z" />
+    </svg>
+  );
+}
+
+function PencilIcon() {
+  return (
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+    >
+      <path d="m16.5 3.5 4 4L8 20H4v-4z" />
+      <path d="m14 6 4 4" />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg
+      className="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 3v12" />
+      <path d="m7 10 5 5 5-5" />
+      <path d="M5 21h14" />
     </svg>
   );
 }
