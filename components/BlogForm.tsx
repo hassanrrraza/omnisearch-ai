@@ -28,9 +28,10 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted, isValid },
     control,
   } = useForm<BlogFormValues, unknown, BlogInput>({
+    mode: "onChange",
     resolver: zodResolver(BlogInputSchema),
     defaultValues: {
       title: "",
@@ -199,6 +200,12 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
           {...register("wordCount", { valueAsNumber: true })}
         />
       </Field>
+
+      {isSubmitted || isValid ? (
+        <p className="text-center text-xs text-neutral-400">
+          ⏱ Estimated generation time: 15-30 seconds
+        </p>
+      ) : null}
 
       <button
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-70"
