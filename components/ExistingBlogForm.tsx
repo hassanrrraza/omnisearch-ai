@@ -31,9 +31,10 @@ export function ExistingBlogForm({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted, isValid },
     control,
   } = useForm<OptimizeFormValues, unknown, OptimizeInput>({
+    mode: "onChange",
     resolver: zodResolver(OptimizeInputSchema),
     defaultValues: {
       existingBlog: "",
@@ -174,6 +175,12 @@ export function ExistingBlogForm({
           {...register("notes")}
         />
       </Field>
+
+      {isSubmitted || isValid ? (
+        <p className="text-center text-xs text-neutral-400">
+          ⏱ Estimated optimization time: 20-40 seconds
+        </p>
+      ) : null}
 
       <button
         className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-70"
