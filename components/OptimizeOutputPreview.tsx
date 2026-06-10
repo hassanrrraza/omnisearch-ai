@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { ExportButtons, ScoreCards } from "@/components/PreviewActions";
+import { SerpPreview } from "@/components/SerpPreview";
 import type { OptimizeOutput } from "@/lib/schemas/optimize-output-schema";
 
 interface OptimizeOutputPreviewProps {
@@ -82,11 +83,7 @@ export function OptimizeOutputPreview({
   return (
     <section className="space-y-4">
       <ScoreCards score={data.score} />
-      <ExportButtons
-        markdown={data.optimizedBlogMarkdown}
-        slug={data.slug}
-        title={data.title}
-      />
+      <ExportButtons data={data} title={data.title} />
 
       <div className="rounded-lg border border-neutral-200 bg-white">
         <div className="border-b border-neutral-200 px-5 pt-4">
@@ -212,6 +209,11 @@ function ChangesLog({ changes }: { changes: OptimizeOutput["changesLog"] }) {
 function MetadataTab({ data }: { data: OptimizeOutput }) {
   return (
     <div className="grid gap-4">
+      <SerpPreview
+        metaDescription={data.metaDescription}
+        seoTitle={data.seoTitle}
+        slug={data.slug}
+      />
       <LabeledCard label="SEO Title">{data.seoTitle}</LabeledCard>
       <LabeledCard label="Meta Description">{data.metaDescription}</LabeledCard>
       <LabeledCard label="URL Slug">
