@@ -1,36 +1,253 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OmniSearch AI
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+**The open-source engine for SEO, AEO, GEO, and LLM content optimization.**
+
+Generate or upgrade blog posts that rank on Google, appear in AI Overviews,
+get cited by ChatGPT and Perplexity, and surface in LLM-powered search -
+all powered by your own Gemini API key.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://typescriptlang.org)
+[![Gemini API](https://img.shields.io/badge/Gemini-2.0_Flash-blue?logo=google)](https://ai.google.dev)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+[**Try it in 60 seconds**](#quick-start) ·
+[Report a Bug](https://github.com/hassanrrraza/omnisearch-ai/issues/new?template=bug_report.md) ·
+[Request a Feature](https://github.com/hassanrrraza/omnisearch-ai/issues/new?template=feature_request.md)
+
+</div>
+
+---
+
+## Why OmniSearch AI?
+
+Most AI writing tools generate content. OmniSearch AI optimizes it across four
+distinct discovery channels that most creators ignore:
+
+| Channel | What it means | OmniSearch AI output |
+|---|---|---|
+| **SEO** | Rank on Google | Title tag, meta, slug, keyword placement, schema |
+| **AEO** | Appear in AI Overviews & answer boxes | Featured snippet, FAQPage schema, PAA-ready FAQ |
+| **GEO** | Get cited by ChatGPT, Perplexity, Claude | Factual density, comparison tables, LLM summary |
+| **LLM** | Surface in AI-powered search | Semantic structure, extractable facts, Q&A format |
+
+> **There is no other open-source tool that handles all four together.**
+
+---
+
+## Features
+
+### ✦ Create New Blog
+
+- Generate a complete blog post up to 2,500 words from a title + keyword
+- SEO title, meta description, and URL slug auto-generated
+- Featured snippet answer block (40-60 words, Google-extractable)
+- 3-question FAQ section from real PAA (People Also Ask) patterns
+- FAQPage + BreadcrumbList JSON-LD schema ready to paste into your site
+- LLM Summary for AI system comprehension and citation
+- Optimization score across SEO / AEO / GEO / LLM (0-100 each)
+
+### ✦ Optimize Existing Blog
+
+- Paste any existing article and get a fully upgraded version back
+- Preserves your voice and core content
+- Detailed change log: what changed, where, and why
+- Before/after improvement report per optimization category
+- Same full output bundle: metadata, FAQ, schema, LLM summary, scores
+
+### ✦ Export Everything
+
+- Copy Markdown to clipboard
+- Download as `.md`
+- Download as `.html` (styled, ready to preview in browser)
+- Copy all metadata as JSON
+
+---
+
+## Quick Start
+
+**Requirements:** Node.js 18+ · A free [Gemini API key](https://aistudio.google.com/app/apikey)
+
+```bash
+git clone https://github.com/hassanrrraza/omnisearch-ai
+cd omnisearch-ai
+npm install
+cp .env.example .env.local
+```
+
+Open `.env.local` and add your key:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and you are ready.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How It Works
 
-## Learn More
+OmniSearch AI injects three optimization guides as system context into every
+Gemini prompt. The guides encode rules for SEO, AEO, and GEO. Gemini applies
+them to generate or improve your content.
 
-To learn more about Next.js, take a look at the following resources:
+```text
+User Input
+↓
+Form Validation (Zod)
+↓
+Load SEO + AEO + GEO Guides from lib/guides/
+↓
+Build Prompt (lib/prompts/)
+↓
+Call Gemini API (server-side only - key never exposed)
+↓
+Validate JSON Response (Zod)
+↓
+Render: Blog · Metadata · FAQ · Schema · LLM Summary · Score
+↓
+Export: .md · .html · clipboard
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Your API key never leaves your machine.** All Gemini calls go through the
+Next.js API route. The key is only read server-side from `.env.local`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Customize the Optimization Engine
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The three `.md` files in `lib/guides/` are the knowledge base:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+lib/guides/
+seo-optimization-guide.md   ← SEO rules, keyword strategy, E-E-A-T signals
+aeo-optimization-guide.md   ← Answer engine rules, FAQPage, featured snippets
+geo-optimization-guide.md   ← GEO rules, factual density, LLM citation signals
+```
+
+**Replace these files with your own guides** and the engine uses them instead.
+This makes OmniSearch AI fully adaptable to any niche, brand voice, or
+optimization methodology.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict mode) |
+| Styling | Tailwind CSS |
+| AI Engine | Google Gemini 2.0 Flash |
+| Validation | Zod |
+| Forms | React Hook Form |
+| Markdown | react-markdown |
+
+---
+
+## Folder Structure
+
+```text
+omnisearch-ai/
+├── app/
+│   ├── page.tsx                    # Homepage
+│   ├── new-blog/page.tsx           # Create blog flow
+│   ├── optimize-blog/page.tsx      # Optimize blog flow
+│   └── api/
+│       ├── generate-blog/route.ts  # POST /api/generate-blog
+│       └── optimize-blog/route.ts  # POST /api/optimize-blog
+├── components/
+│   ├── BlogForm.tsx                # New blog form
+│   ├── ExistingBlogForm.tsx        # Optimize blog form
+│   ├── OutputPreview.tsx           # New blog output panel
+│   ├── OptimizeOutputPreview.tsx   # Optimize output panel
+│   ├── PreviewActions.tsx          # Score cards + export buttons
+│   └── SerpPreview.tsx             # Google SERP preview
+├── lib/
+│   ├── gemini.ts                   # Gemini client
+│   ├── guides/                     # SEO · AEO · GEO knowledge base
+│   ├── prompts/                    # Prompt builder functions
+│   ├── schemas/                    # Zod input/output schemas
+│   └── utils/download.ts           # Export helpers
+├── input/                          # Example input files
+├── .env.example                    # Environment variable template
+└── README.md
+```
+
+---
+
+## Roadmap
+
+### ✅ Phase 1 — Core Engine
+
+- [x] New blog generator with full output bundle
+- [x] Gemini API integration (server-side)
+- [x] SEO + AEO + GEO guide injection
+- [x] Structured JSON output with Zod validation
+
+### ✅ Phase 2 — Full Output
+
+- [x] Optimize existing blog flow
+- [x] Score cards (SEO / AEO / GEO / LLM / Overall)
+- [x] Export: copy MD · download .md · download .html
+- [x] Optimization report + change log
+
+### 🔄 Phase 3 — Polish (current)
+
+- [x] SERP-style preview
+- [ ] WordPress-ready export
+- [ ] MDX export
+
+### 📋 Phase 4 — Power Modes
+
+- [ ] CLI: `npx omnisearch-ai new` / `npx omnisearch-ai optimize`
+- [ ] File mode: `/input` → `/output` pipeline
+- [ ] Batch optimization
+- [ ] GitHub Action for automated blog optimization
+
+### 💡 Phase 5 — Advanced
+
+- [ ] Brand voice presets
+- [ ] Competitor URL input
+- [ ] Content gap analysis
+- [ ] Multi-language optimization
+- [ ] AI crawler readability score
+
+---
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+
+**Good first issues:** look for the
+[`good first issue`](https://github.com/hassanrrraza/omnisearch-ai/issues?q=label%3A%22good+first+issue%22)
+label.
+
+---
+
+## Maintainer
+
+Built and maintained by [Hassan Raza](https://github.com/hassanrrraza).
+
+Website: [https://hassanr.com/](https://hassanr.com/)
+
+---
+
+## License
+
+MIT © [Hassan Raza](https://github.com/hassanrrraza)
+
+---
+
+<div align="center">
+  <sub>If OmniSearch AI helped you, please ⭐ star the repo.</sub>
+</div>
