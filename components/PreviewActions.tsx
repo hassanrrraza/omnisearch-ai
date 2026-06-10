@@ -6,21 +6,34 @@ import {
   markdownToBasicHtml,
 } from "@/lib/utils/download";
 
-interface ScoreSet {
+type ScoreSet = {
   seo: number;
   aeo: number;
   geo: number;
   llm: number;
   overall: number;
-}
+};
+
+export type PreviewData = {
+  seoTitle: string;
+  metaDescription: string;
+  slug: string;
+  targetKeyword: string;
+  secondaryKeywords: string[];
+  excerpt: string;
+  featuredSnippet: string;
+  llmSummary: string;
+  blogMarkdown?: string;
+  optimizedBlogMarkdown?: string;
+  score: ScoreSet;
+};
 
 interface ScoreCardsProps {
   score: ScoreSet;
 }
 
 interface ExportButtonsProps {
-  markdown: string;
-  slug: string;
+  data: PreviewData;
   title: string;
 }
 
@@ -51,24 +64,48 @@ export function ScoreCards({ score }: ScoreCardsProps) {
   );
 }
 
-export function ExportButtons({ markdown, slug, title }: ExportButtonsProps) {
-  const [copyLabel, setCopyLabel] = useState("Copy Markdown");
-  const safeSlug = slug || "optimized-blog";
+export function ExportButtons({ data, title }: ExportButtonsProps) {
+  const [copyMarkdownLabel, setCopyMarkdownLabel] = useState("Copy Markdown");
+  const [copyMetadataLabel, setCopyMetadataLabel] = useState(
+    "Copy Metadata JSON"
+  );
+  const markdown = data.blogMarkdown ?? data.optimizedBlogMarkdown ?? "";
+  const safeSlug = data.slug || "optimized-blog";
 
   async function copyMarkdown() {
     await navigator.clipboard.writeText(markdown);
-    setCopyLabel("Copied!");
-    window.setTimeout(() => setCopyLabel("Copy Markdown"), 2000);
+    setCopyMarkdownLabel("Copied!");
+    window.setTimeout(() => setCopyMarkdownLabel("Copy Markdown"), 2000);
+  }
+
+  async function copyMetadata() {
+    const metadata = {
+      seoTitle: data.seoTitle,
+      metaDescription: data.metaDescription,
+      slug: data.slug,
+      targetKeyword: data.targetKeyword,
+      secondaryKeywords: data.secondaryKeywords,
+      excerpt: data.excerpt,
+      featuredSnippet: data.featuredSnippet,
+      llmSummary: data.llmSummary,
+    };
+
+    await navigator.clipboard.writeText(JSON.stringify(metadata, null, 2));
+    setCopyMetadataLabel("Copied!");
+    window.setTimeout(
+      () => setCopyMetadataLabel("Copy Metadata JSON"),
+      2000
+    );
   }
 
   return (
-    <div className="flex flex-col gap-2 sm:flex-row">
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
       <button
         className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
         onClick={copyMarkdown}
         type="button"
       >
-        {copyLabel}
+        {copyMarkdownLabel}
       </button>
       <button
         className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
@@ -92,6 +129,13 @@ export function ExportButtons({ markdown, slug, title }: ExportButtonsProps) {
       >
         Download .html
       </button>
+      <button
+        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
+        onClick={copyMetadata}
+        type="button"
+      >
+        {copyMetadataLabel}
+      </button>
     </div>
   );
 }
@@ -107,7 +151,11 @@ function ScoreCard({
 }) {
   return (
     <div className="rounded-lg border border-neutral-200 bg-white p-4">
-      <p className={`font-semibold text-neutral-900 ${large ? "text-base" : "text-sm"}`}>
+      <p
+        className={`font-semibold text-neutral-900 ${
+          large ? "text-base" : "text-sm"
+        }`}
+      >
         {label}
       </p>
       <div className="mt-3 flex items-end gap-1">
