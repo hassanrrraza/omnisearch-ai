@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { ExportButtons, ScoreCards } from "@/components/PreviewActions";
 import type { BlogOutput } from "@/lib/schemas/blog-output-schema";
 
 interface OutputPreviewProps {
@@ -9,7 +10,7 @@ interface OutputPreviewProps {
   loading: boolean;
 }
 
-const tabs = ["📝 Blog", "📊 Metadata", "❓ FAQ + Snippet", "🤖 LLM + Schema"];
+const tabs = ["Blog", "Metadata", "FAQ + Snippet", "LLM + Schema"];
 
 export function OutputPreview({ data, loading }: OutputPreviewProps) {
   const [activeTab, setActiveTab] = useState(0);
@@ -68,100 +69,49 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
   }
 
   return (
-    <section className="rounded-lg border border-neutral-200 bg-white">
-      <div className="border-b border-neutral-200 px-5 pt-4">
-        <div className="flex gap-5 overflow-x-auto">
-          {tabs.map((tab, index) => (
-            <button
-              className={`whitespace-nowrap border-b-2 px-1 pb-3 text-sm transition ${
-                activeTab === index
-                  ? "border-neutral-900 font-medium text-neutral-900"
-                  : "border-transparent text-neutral-500 hover:text-neutral-700"
-              }`}
-              key={tab}
-              onClick={() => setActiveTab(index)}
-              type="button"
-            >
-              {tab}
-            </button>
-          ))}
+    <section className="space-y-4">
+      <ScoreCards score={data.score} />
+      <ExportButtons
+        markdown={data.blogMarkdown}
+        slug={data.slug}
+        title={data.title}
+      />
+
+      <div className="rounded-lg border border-neutral-200 bg-white">
+        <div className="border-b border-neutral-200 px-5 pt-4">
+          <div className="flex gap-5 overflow-x-auto">
+            {tabs.map((tab, index) => (
+              <button
+                className={`whitespace-nowrap border-b-2 px-1 pb-3 text-sm transition ${
+                  activeTab === index
+                    ? "border-neutral-900 font-medium text-neutral-900"
+                    : "border-transparent text-neutral-500 hover:text-neutral-700"
+                }`}
+                key={tab}
+                onClick={() => setActiveTab(index)}
+                type="button"
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="p-5">
-        {activeTab === 0 ? (
-          <div className="prose prose-neutral max-w-none">
-            <ReactMarkdown>{data.blogMarkdown}</ReactMarkdown>
-          </div>
-        ) : null}
-
-        {activeTab === 1 ? <MetadataTab data={data} /> : null}
-
-        {activeTab === 2 ? (
-          <div className="space-y-5">
-            <div className="border-l-4 border-neutral-900 bg-neutral-50 p-4">
-              <p className="text-xs font-medium uppercase tracking-wide text-neutral-500">
-                Featured Snippet Answer
-              </p>
-              <p className="mt-2 text-sm leading-6 text-neutral-800">
-                {data.featuredSnippet}
-              </p>
+        <div className="p-5">
+          {activeTab === 0 ? (
+            <div className="prose prose-neutral max-w-none">
+              <ReactMarkdown>{data.blogMarkdown}</ReactMarkdown>
             </div>
+          ) : null}
 
-            <div className="space-y-3">
-              {data.faq.map((item, index) => (
-                <div
-                  className="rounded-lg border border-neutral-200 bg-white"
-                  key={item.question}
-                >
-                  <button
-                    className="flex w-full items-center gap-3 px-4 py-3 text-left"
-                    onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
-                    type="button"
-                  >
-                    <span className="rounded-full bg-neutral-900 px-2 py-1 text-xs font-medium text-white">
-                      Q{index + 1}
-                    </span>
-                    <span className="flex-1 text-sm font-medium text-neutral-950">
-                      {item.question}
-                    </span>
-                    <span className="text-neutral-400">
-                      {openFaq === index ? "-" : "+"}
-                    </span>
-                  </button>
-                  {openFaq === index ? (
-                    <p className="border-t border-neutral-100 px-4 py-3 text-sm leading-6 text-neutral-700">
-                      {item.answer}
-                    </p>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : null}
+          {activeTab === 1 ? <MetadataTab data={data} /> : null}
 
-        {activeTab === 3 ? (
-          <div className="space-y-5">
-            <div className="rounded-lg bg-neutral-50 p-4">
-              <p className="text-sm font-medium text-neutral-950">LLM Summary</p>
-              <p className="mt-2 text-sm leading-6 text-neutral-700">
-                {data.llmSummary}
-              </p>
-              <p className="mt-3 text-xs text-neutral-500">
-                This summary helps AI systems understand and cite your content.
-              </p>
-            </div>
+          {activeTab === 2 ? (
+            <FaqTab data={data} onToggle={setOpenFaq} openFaq={openFaq} />
+          ) : null}
 
-            <div>
-              <p className="mb-2 text-sm font-medium text-neutral-950">
-                Schema JSON-LD (FAQPage)
-              </p>
-              <pre className="overflow-x-auto rounded-lg bg-neutral-950 p-4 text-sm text-green-400">
-                <code>{JSON.stringify(data.schemaJsonLd, null, 2)}</code>
-              </pre>
-            </div>
-          </div>
-        ) : null}
+          {activeTab === 3 ? <LlmSchemaTab data={data} /> : null}
+        </div>
       </div>
     </section>
   );
@@ -188,6 +138,110 @@ function MetadataTab({ data }: { data: BlogOutput }) {
           ))}
         </div>
       </LabeledCard>
+    </div>
+  );
+}
+
+function FaqTab({
+  data,
+  onToggle,
+  openFaq,
+}: {
+  data: BlogOutput;
+  onToggle: (index: number) => void;
+  openFaq: number;
+}) {
+  return (
+    <div className="space-y-5">
+      <div className="border-l-4 border-neutral-900 bg-neutral-50 p-4">
+        <p className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+          Featured Snippet Answer
+        </p>
+        <p className="mt-2 text-sm leading-6 text-neutral-800">
+          {data.featuredSnippet}
+        </p>
+      </div>
+
+      <div className="space-y-3">
+        {data.faq.map((item, index) => (
+          <div
+            className="rounded-lg border border-neutral-200 bg-white"
+            key={item.question}
+          >
+            <button
+              className="flex w-full items-center gap-3 px-4 py-3 text-left"
+              onClick={() => onToggle(openFaq === index ? -1 : index)}
+              type="button"
+            >
+              <span className="rounded-full bg-neutral-900 px-2 py-1 text-xs font-medium text-white">
+                Q{index + 1}
+              </span>
+              <span className="flex-1 text-sm font-medium text-neutral-950">
+                {item.question}
+              </span>
+              <span className="text-neutral-400">
+                {openFaq === index ? "-" : "+"}
+              </span>
+            </button>
+            {openFaq === index ? (
+              <p className="border-t border-neutral-100 px-4 py-3 text-sm leading-6 text-neutral-700">
+                {item.answer}
+              </p>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LlmSchemaTab({ data }: { data: BlogOutput }) {
+  return (
+    <div className="space-y-5">
+      <OptimizationReportPanel data={data} />
+
+      <div className="rounded-lg bg-neutral-50 p-4">
+        <p className="text-sm font-medium text-neutral-950">LLM Summary</p>
+        <p className="mt-2 text-sm leading-6 text-neutral-700">
+          {data.llmSummary}
+        </p>
+        <p className="mt-3 text-xs text-neutral-500">
+          This summary helps AI systems understand and cite your content.
+        </p>
+      </div>
+
+      <div>
+        <p className="mb-2 text-sm font-medium text-neutral-950">
+          Schema JSON-LD (FAQPage)
+        </p>
+        <pre className="overflow-x-auto rounded-lg bg-neutral-950 p-4 text-sm text-green-400">
+          <code>{JSON.stringify(data.schemaJsonLd, null, 2)}</code>
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+function OptimizationReportPanel({ data }: { data: BlogOutput }) {
+  return (
+    <div className="grid gap-3">
+      <ReportSection items={data.optimizationReport.seo} label="SEO" />
+      <ReportSection items={data.optimizationReport.aeo} label="AEO" />
+      <ReportSection items={data.optimizationReport.geo} label="GEO" />
+      <ReportSection items={data.optimizationReport.llm} label="LLM" />
+    </div>
+  );
+}
+
+function ReportSection({ items, label }: { items: string[]; label: string }) {
+  return (
+    <div className="rounded-lg border border-neutral-200 p-4">
+      <h3 className="text-sm font-bold text-neutral-950">{label}</h3>
+      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-6 text-neutral-700">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
