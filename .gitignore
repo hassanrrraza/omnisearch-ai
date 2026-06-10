@@ -32,10 +32,29 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# Environment
+.env.local
+.env*.local
 
 # vercel
 .vercel
 
+# Output files (generated content - not committed)
+output/*.json
+output/*.md
+output/*.html
+output/*.mdx
+
+# Input files with real content (keep only examples)
+input/new-blog.json
+input/existing-blog.md
+input/optimize-config.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS
+Thumbs.db
