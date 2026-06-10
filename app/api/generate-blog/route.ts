@@ -3,6 +3,7 @@ import { getGeminiModel } from "@/lib/gemini";
 import { buildCreateBlogPrompt } from "@/lib/prompts/create-blog";
 import { BlogInputSchema } from "@/lib/schemas/blog-input-schema";
 import { BlogOutputSchema } from "@/lib/schemas/blog-output-schema";
+import { parseGeminiJson } from "@/lib/utils/json";
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,14 +23,35 @@ export async function POST(req: NextRequest) {
     const result = await model.generateContent(prompt);
     const raw = result.response.text();
 
+    if (process.env.NODE_ENV === "development") {
+      console.log("[generate-blog] raw length:", raw.length);
+      console.log("[generate-blog] raw preview:", raw.slice(0, 500));
+      console.log(
+        "[generate-blog] prompt feedback:",
+        result.response.promptFeedback
+      );
+      console.log(
+        "[generate-blog] finish reason:",
+        result.response.candidates?.[0]?.finishReason
+      );
+      console.log(
+        "[generate-blog] safety ratings:",
+        result.response.candidates?.[0]?.safetyRatings
+      );
+    }
+
     let parsedJson: unknown;
     try {
-      parsedJson = JSON.parse(raw);
+      parsedJson = parseGeminiJson(raw);
     } catch {
       return NextResponse.json(
         {
-          error: "Gemini returned non-JSON. Try again.",
-          raw: raw.slice(0, 500),
+          error: "Gemini returned invalid JSON.",
+          hint: "The response may be truncated, markdown-wrapped, blocked, or malformed. Try a shorter blog or reduce output length.",
+          rawPreview:
+            process.env.NODE_ENV === "development"
+              ? raw.slice(0, 500)
+              : undefined,
         },
         { status: 500 }
       );
