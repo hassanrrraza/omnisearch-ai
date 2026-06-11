@@ -122,38 +122,43 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="grid min-h-[calc(100vh-6rem)] items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
-      <div>
-        <p className="inline-flex rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1 text-xs font-semibold uppercase text-teal-200">
-          Open-source SEO - AEO - GEO - LLM optimization engine
+    <section className="hero">
+      <div className="hero-grid">
+        <div className="hero-copy">
+          <p className="hero-eyebrow">
+            Open-source SEO · AEO · GEO · LLM optimization engine
         </p>
-        <h1 className="mt-7 max-w-4xl text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Turn blog ideas and existing articles into search-ready,
-          AI-readable content packages.
+          <h1 className="hero-title">
+            The open-source workflow engine for search-ready, AI-readable
+            content.
         </h1>
-        <p className="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
-          OmniSearch AI packages a proven content optimization workflow into an
-          open-source engine. Generate new blogs or upgrade existing articles
-          with structured SEO, AEO, GEO, and LLM optimization loops - powered by
-          your own Gemini API key.
+          <p className="hero-subtitle">
+            Generate new blogs or optimize existing articles with the same
+            structured SEO, AEO, GEO, and LLM content workflow used in real
+            client and agency projects — powered by your own Gemini API key.
         </p>
 
-        <p className="mt-5 max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-7 text-slate-300">
-          Built around a simple principle: better inputs create better outputs.
-          OmniSearch AI gives you the workflow, structure, prompts, and
-          optimization system. Your audience, context, and strategy make the
-          final result stronger.
+          <p className="hero-package-line">
+            OmniSearch AI helps turn your topic, audience, keywords, links, and
+            CTA into a complete content package: article, metadata, FAQs,
+            schema, scoring report, and export-ready files.
         </p>
 
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <PrimaryLink href="/new-blog">Create New Blog</PrimaryLink>
+          <p className="hero-insight">
+            Better inputs create better outputs. The engine gives you the
+            workflow, prompts, and optimization loops — your context makes the
+            result stronger.
+        </p>
+
+          <div className="hero-actions">
+            <PrimaryLink href="/new-blog">Start New Blog</PrimaryLink>
           <SecondaryLink href="/optimize-blog">
             Optimize Existing Blog
           </SecondaryLink>
-          <GhostLink href={githubUrl}>View on GitHub</GhostLink>
+            <GhostLink href={githubUrl}>View GitHub Repo</GhostLink>
         </div>
 
-        <p className="mt-6 text-sm leading-6 text-slate-400">
+          <p className="hero-credit">
           Developed and open-sourced by{" "}
           <a
             className="font-semibold text-teal-200 underline underline-offset-4 transition hover:text-white"
@@ -163,63 +168,67 @@ function Hero() {
           >
             Hassan Raza
           </a>{" "}
-          - Full-Stack Engineer and AI Engineer.
+            — Full-Stack Engineer & AI Engineer.
         </p>
       </div>
 
       <WorkflowPreview />
+      </div>
     </section>
   );
 }
 
 function WorkflowPreview() {
+  const rows = [
+    {
+      label: "Input",
+      text: "Topic · Keyword · Audience · Intent · Links · CTA",
+    },
+    {
+      label: "Optimization Loops",
+      text: "SEO · AEO · GEO · LLM",
+    },
+    {
+      label: "Output Package",
+      text: "Blog · Metadata · FAQ · Schema · Scores",
+    },
+    {
+      label: "Export",
+      text: "Markdown · HTML · MDX · JSON",
+    },
+  ];
+
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-4 shadow-2xl shadow-black/30 backdrop-blur">
-      <div className="rounded-[1.25rem] border border-white/10 bg-slate-950/80 p-5">
-        <div className="flex items-center justify-between gap-3">
+    <div className="workflow-preview-card">
+      <div className="workflow-preview-header">
           <div>
-            <p className="text-xs font-semibold uppercase text-teal-200">
-              Workflow Preview
-            </p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-white">
-              From raw context to publish-ready output
+          <p className="text-xs font-semibold uppercase text-teal-200">
+            Workflow Preview
+          </p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-white">
+            From raw context to publish-ready content.
             </h2>
           </div>
-          <span className="rounded-full bg-teal-300/10 px-3 py-1 text-xs font-semibold text-teal-200">
+        <span className="rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1 text-xs font-semibold text-teal-200">
             Gemini powered
           </span>
         </div>
 
-        <div className="mt-6 grid gap-3">
-          {[
-            "Topic, keyword, audience, intent, links, CTA",
-            "SEO/AEO/GEO/LLM optimization loops",
-            "Article, metadata, FAQ, schema, scores",
-            "Markdown, HTML, MDX, JSON exports",
-          ].map((item, index) => (
-            <div
-              className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-4"
-              key={item}
-            >
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal-300 text-xs font-bold text-slate-950">
-                {index + 1}
-              </span>
-              <p className="text-sm leading-6 text-slate-200">{item}</p>
+      <div className="mt-6 grid gap-3">
+        {rows.map((row) => (
+          <div className="workflow-preview-row" key={row.label}>
+            <p className="workflow-preview-label">{row.label}</p>
+            <p className="workflow-preview-text">{row.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-5 rounded-xl border border-teal-300/20 bg-teal-300/10 p-4">
-          <p className="text-sm font-semibold text-teal-100">
-            A tested content optimization workflow packaged into an open-source
-            tool.
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-300">
-            Designed to help content become easier to crawl, understand, cite,
-            and surface across search and AI systems.
-          </p>
+      <div className="mt-5 rounded-2xl border border-teal-300/20 bg-teal-300/10 p-4">
+        <p className="text-sm leading-6 text-slate-200">
+          A tested content optimization workflow packaged into an open-source
+          tool.
+        </p>
         </div>
-      </div>
     </div>
   );
 }
