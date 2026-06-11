@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import type { z } from "zod";
@@ -16,14 +16,22 @@ interface BlogFormProps {
 }
 
 const inputClass =
-  "mt-2 w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-950 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10";
-const labelClass = "text-sm font-medium text-neutral-900";
-const errorClass = "mt-1 text-sm text-red-500";
+  "mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-950 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 disabled:cursor-not-allowed disabled:bg-slate-50";
+const labelClass = "text-sm font-semibold text-slate-900";
+const errorClass = "mt-1 text-sm font-medium text-red-600";
+const loadingMessages = [
+  "Understanding your blog idea...",
+  "Mapping search intent and content structure...",
+  "Optimizing for SEO, AEO, GEO, and LLM visibility...",
+  "Generating metadata, FAQ, schema, and scores...",
+  "Finalizing your blog package...",
+];
 type BlogFormValues = z.input<typeof BlogInputSchema>;
 
 export function BlogForm({ onResult, onLoading }: BlogFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmittingBlog, setIsSubmittingBlog] = useState(false);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
   const {
     register,
@@ -49,9 +57,25 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
   });
 
   const wordCount = useWatch({ control, name: "wordCount" });
+  const loadingMessage = loadingMessages[loadingMessageIndex];
+
+  useEffect(() => {
+    if (!isSubmittingBlog) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingMessageIndex(
+        (current) => (current + 1) % loadingMessages.length
+      );
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, [isSubmittingBlog]);
 
   async function onSubmit(values: BlogInput) {
     setError(null);
+    setLoadingMessageIndex(0);
     setIsSubmittingBlog(true);
     onLoading(true);
 
@@ -85,8 +109,13 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
   }
 
   return (
-    <form className="mt-8 space-y-5" onSubmit={handleSubmit(onSubmit)}>
-      <Field label="Blog Title" error={errors.title?.message} required>
+    <form className="mt-5 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+      <Field
+        description="Use a working title. OmniSearch AI can refine it for search intent."
+        error={errors.title?.message}
+        label="Blog Title"
+        required
+      >
         <input
           className={inputClass}
           placeholder="How to Build a SaaS with Next.js"
@@ -95,7 +124,12 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
         />
       </Field>
 
-      <Field label="Main Keyword" error={errors.mainKeyword?.message} required>
+      <Field
+        description="The primary phrase this article should rank for."
+        error={errors.mainKeyword?.message}
+        label="Main Keyword"
+        required
+      >
         <input
           className={inputClass}
           placeholder="Next.js SaaS development"
@@ -105,9 +139,9 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       </Field>
 
       <Field
-        label="Secondary Keywords"
         error={errors.secondaryKeywords?.message}
-        helpText="Comma-separated"
+        helpText="Comma-separated supporting terms."
+        label="Secondary Keywords"
       >
         <input
           className={inputClass}
@@ -118,37 +152,46 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       </Field>
 
       <Field
-        label="Target Audience"
+        description="Who should the article help?"
         error={errors.targetAudience?.message}
+        label="Target Audience"
         required
       >
         <input
           className={inputClass}
-          placeholder="startup founders, indie developers"
+          placeholder="Startup founders, indie developers"
           type="text"
           {...register("targetAudience")}
         />
       </Field>
 
-      <Field label="Search Intent" error={errors.searchIntent?.message}>
+      <Field
+        description="Choose the closest intent behind the query."
+        error={errors.searchIntent?.message}
+        label="Search Intent"
+      >
         <select className={inputClass} {...register("searchIntent")}>
-          <option value="informational">informational</option>
-          <option value="commercial">commercial</option>
-          <option value="transactional">transactional</option>
-          <option value="navigational">navigational</option>
+          <option value="informational">Informational</option>
+          <option value="commercial">Commercial</option>
+          <option value="transactional">Transactional</option>
+          <option value="navigational">Navigational</option>
         </select>
       </Field>
 
-      <Field label="Tone" error={errors.tone?.message}>
+      <Field error={errors.tone?.message} label="Tone">
         <select className={inputClass} {...register("tone")}>
-          <option value="professional">professional</option>
-          <option value="conversational">conversational</option>
-          <option value="technical">technical</option>
-          <option value="beginner-friendly">beginner-friendly</option>
+          <option value="professional">Professional</option>
+          <option value="conversational">Conversational</option>
+          <option value="technical">Technical</option>
+          <option value="beginner-friendly">Beginner-friendly</option>
         </select>
       </Field>
 
-      <Field label="Industry / Niche" error={errors.industry?.message} required>
+      <Field
+        error={errors.industry?.message}
+        label="Industry / Niche"
+        required
+      >
         <input
           className={inputClass}
           placeholder="SaaS, AI, Developer Tools"
@@ -158,8 +201,8 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       </Field>
 
       <Field
-        label="Product or Service to Mention"
         error={errors.productMention?.message}
+        label="Product or Service to Mention"
       >
         <input
           className={inputClass}
@@ -169,16 +212,20 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
         />
       </Field>
 
-      <Field label="Internal Links" error={errors.internalLinks?.message}>
+      <Field
+        error={errors.internalLinks?.message}
+        helpText="One URL per line. OmniSearch AI will place them naturally."
+        label="Internal Links"
+      >
         <textarea
           className={inputClass}
-          placeholder="One URL per line"
+          placeholder="https://example.com/pricing"
           rows={3}
           {...register("internalLinks")}
         />
       </Field>
 
-      <Field label="Call to Action" error={errors.cta?.message}>
+      <Field error={errors.cta?.message} label="Call to Action">
         <input
           className={inputClass}
           placeholder="Start your free trial at example.com"
@@ -188,11 +235,12 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       </Field>
 
       <Field
-        label={`Word Count: ${wordCount ?? 1500}`}
         error={errors.wordCount?.message}
+        helpText="Maximum 2,500 words."
+        label={`Word Count: ${wordCount ?? 1500}`}
       >
         <input
-          className="mt-3 w-full accent-neutral-900"
+          className="mt-3 w-full accent-teal-600"
           max={2500}
           min={300}
           step={100}
@@ -202,13 +250,14 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       </Field>
 
       {isSubmitted || isValid ? (
-        <p className="text-center text-xs text-neutral-400">
-          ⏱ Estimated generation time: 15-30 seconds
+        <p className="rounded-lg bg-slate-50 px-3 py-2 text-center text-xs text-slate-500">
+          Estimated generation time: 20-60 seconds depending on word count.
         </p>
       ) : null}
 
       <button
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-70"
+        aria-live="polite"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
         disabled={isSubmittingBlog}
         type="submit"
       >
@@ -233,38 +282,57 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
                 fill="currentColor"
               />
             </svg>
-            Generating...
+            {loadingMessage}
           </>
         ) : (
-          "✦ Generate Optimized Blog"
+          "Generate Blog"
         )}
       </button>
 
-      {error ? <p className="text-sm text-red-500">{error}</p> : null}
+      {error ? (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      ) : null}
     </form>
   );
 }
 
 interface FieldProps {
   children: React.ReactNode;
+  description?: string;
   error?: string;
   helpText?: string;
   label: string;
   required?: boolean;
 }
 
-function Field({ children, error, helpText, label, required }: FieldProps) {
+function Field({
+  children,
+  description,
+  error,
+  helpText,
+  label,
+  required,
+}: FieldProps) {
   return (
     <label className="block">
-      <span className={labelClass}>
-        {label}
-        {required ? <span className="text-red-500"> *</span> : null}
+      <span className="flex items-center justify-between gap-3">
+        <span className={labelClass}>
+          {label}
+          {required ? <span className="text-red-500"> *</span> : null}
+        </span>
         {!required && !helpText ? (
-          <span className="text-neutral-400"> optional</span>
+          <span className="text-xs text-slate-400">optional</span>
         ) : null}
       </span>
+      {description ? (
+        <span className="mt-1 block text-xs leading-5 text-slate-500">
+          {description}
+        </span>
+      ) : null}
       {children}
-      {helpText ? <p className="mt-1 text-xs text-neutral-500">{helpText}</p> : null}
+      {helpText ? <p className="mt-1 text-xs text-slate-500">{helpText}</p> : null}
       {error ? <p className={errorClass}>{error}</p> : null}
     </label>
   );

@@ -16,9 +16,9 @@ interface ExistingBlogFormProps {
 }
 
 const inputClass =
-  "mt-2 w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-950 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10";
-const labelClass = "text-sm font-medium text-neutral-900";
-const errorClass = "mt-1 text-sm text-red-500";
+  "mt-2 w-full rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-950 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-4 focus:ring-teal-500/10 disabled:cursor-not-allowed disabled:bg-slate-50";
+const labelClass = "text-sm font-semibold text-slate-900";
+const errorClass = "mt-1 text-sm font-medium text-red-600";
 const loadingMessages = [
   "Analyzing your existing blog...",
   "Improving structure, headings, and search intent...",
@@ -111,26 +111,36 @@ export function ExistingBlogForm({
   }
 
   return (
-    <form className="mt-8 space-y-5" onSubmit={handleSubmit(onSubmit)}>
-      <Field label="Existing Blog Post" error={errors.existingBlog?.message} required>
+    <form className="mt-5 space-y-5" onSubmit={handleSubmit(onSubmit)}>
+      <Field
+        description="Paste the article you want to improve. Markdown is welcome."
+        error={errors.existingBlog?.message}
+        label="Existing Blog Post"
+        required
+      >
         <textarea
-          className={inputClass}
+          className={`${inputClass} min-h-80 resize-y leading-6`}
           minLength={100}
           placeholder="Paste your existing blog post here..."
-          rows={12}
+          rows={14}
           {...register("existingBlog")}
         />
-        <p className="mt-1 text-xs text-neutral-500">
+        <p className="mt-1 text-xs text-slate-500">
           {existingBlog.length.toLocaleString()} / 20,000 characters
         </p>
-        <p className="mt-2 text-xs leading-5 text-neutral-500">
+        <p className="mt-2 rounded-lg bg-teal-50 px-3 py-2 text-xs leading-5 text-teal-900">
           For best results, paste blogs up to 2,500 words. Longer articles may
           take more time because OmniSearch AI processes optimization and
           reporting in separate steps.
         </p>
       </Field>
 
-      <Field label="Main Keyword" error={errors.mainKeyword?.message} required>
+      <Field
+        description="The primary phrase the optimized article should target."
+        error={errors.mainKeyword?.message}
+        label="Main Keyword"
+        required
+      >
         <input
           className={inputClass}
           placeholder="The primary keyword you want to rank for"
@@ -140,8 +150,9 @@ export function ExistingBlogForm({
       </Field>
 
       <Field
-        label="Target Audience"
+        description="Who should the improved article help?"
         error={errors.targetAudience?.message}
+        label="Target Audience"
         required
       >
         <input
@@ -153,43 +164,48 @@ export function ExistingBlogForm({
       </Field>
 
       <Field
-        label="Optimization Goal"
+        description="Choose the main outcome for this optimization run."
         error={errors.optimizationGoal?.message}
+        label="Optimization Goal"
         required
       >
         <select className={inputClass} {...register("optimizationGoal")}>
-          <option value="improve-seo-ranking">Improve SEO Rankings</option>
+          <option value="improve-seo-ranking">Improve SEO rankings</option>
           <option value="target-ai-overviews">
-            Target AI Overviews & Answer Boxes
+            Target AI Overviews and answer boxes
           </option>
           <option value="improve-readability">
-            Improve Readability & Structure
+            Improve readability and structure
           </option>
           <option value="full-optimization">
-            Full Optimization (SEO + AEO + GEO + LLM)
+            Full optimization: SEO, AEO, GEO, and LLM
           </option>
         </select>
       </Field>
 
-      <Field label="Brand Tone" error={errors.brandTone?.message}>
+      <Field error={errors.brandTone?.message} label="Brand Tone">
         <select className={inputClass} {...register("brandTone")}>
-          <option value="professional">professional</option>
-          <option value="conversational">conversational</option>
-          <option value="technical">technical</option>
-          <option value="beginner-friendly">beginner-friendly</option>
+          <option value="professional">Professional</option>
+          <option value="conversational">Conversational</option>
+          <option value="technical">Technical</option>
+          <option value="beginner-friendly">Beginner-friendly</option>
         </select>
       </Field>
 
-      <Field label="Internal Links" error={errors.internalLinks?.message}>
+      <Field
+        error={errors.internalLinks?.message}
+        helpText="One URL per line. Links are included only when they fit naturally."
+        label="Internal Links"
+      >
         <textarea
           className={inputClass}
-          placeholder="One URL per line"
+          placeholder="https://example.com/product"
           rows={3}
           {...register("internalLinks")}
         />
       </Field>
 
-      <Field label="Call to Action" error={errors.cta?.message}>
+      <Field error={errors.cta?.message} label="Call to Action">
         <input
           className={inputClass}
           placeholder="e.g. Try OmniSearch AI free on GitHub"
@@ -198,23 +214,24 @@ export function ExistingBlogForm({
         />
       </Field>
 
-      <Field label="Additional Notes" error={errors.notes?.message}>
+      <Field error={errors.notes?.message} label="Additional Notes">
         <textarea
           className={inputClass}
-          placeholder="Any specific instructions or context for the optimizer"
-          rows={2}
+          placeholder="Any must-keep sections, tone notes, or publishing constraints"
+          rows={3}
           {...register("notes")}
         />
       </Field>
 
       {isSubmitted || isValid ? (
-        <p className="text-center text-xs text-neutral-400">
-          Estimated optimization time: 30-90 seconds for longer articles
+        <p className="rounded-lg bg-slate-50 px-3 py-2 text-center text-xs text-slate-500">
+          Estimated optimization time: 30-90 seconds for longer articles.
         </p>
       ) : null}
 
       <button
-        className="flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-70"
+        aria-live="polite"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-slate-800 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
         disabled={isOptimizing}
         type="submit"
       >
@@ -242,31 +259,54 @@ export function ExistingBlogForm({
             {loadingMessage}
           </>
         ) : (
-          "✦ Optimize My Blog"
+          "Optimize Blog"
         )}
       </button>
 
-      {error ? <p className="text-sm text-red-500">{error}</p> : null}
+      {error ? (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+          {error}
+        </p>
+      ) : null}
     </form>
   );
 }
 
 interface FieldProps {
   children: React.ReactNode;
+  description?: string;
   error?: string;
+  helpText?: string;
   label: string;
   required?: boolean;
 }
 
-function Field({ children, error, label, required }: FieldProps) {
+function Field({
+  children,
+  description,
+  error,
+  helpText,
+  label,
+  required,
+}: FieldProps) {
   return (
     <label className="block">
-      <span className={labelClass}>
-        {label}
-        {required ? <span className="text-red-500"> *</span> : null}
-        {!required ? <span className="text-neutral-400"> optional</span> : null}
+      <span className="flex items-center justify-between gap-3">
+        <span className={labelClass}>
+          {label}
+          {required ? <span className="text-red-500"> *</span> : null}
+        </span>
+        {!required && !helpText ? (
+          <span className="text-xs text-slate-400">optional</span>
+        ) : null}
       </span>
+      {description ? (
+        <span className="mt-1 block text-xs leading-5 text-slate-500">
+          {description}
+        </span>
+      ) : null}
       {children}
+      {helpText ? <p className="mt-1 text-xs text-slate-500">{helpText}</p> : null}
       {error ? <p className={errorClass}>{error}</p> : null}
     </label>
   );
