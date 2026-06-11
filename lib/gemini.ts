@@ -1,14 +1,23 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error(
-    "GEMINI_API_KEY is not set. Add it to .env.local - see .env.example."
-  );
+export class MissingGeminiApiKeyError extends Error {
+  constructor() {
+    super(
+      "GEMINI_API_KEY is not configured. Clone the project and add your own key locally to run generation."
+    );
+    this.name = "MissingGeminiApiKeyError";
+  }
 }
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
 export function getGeminiModel() {
+  const apiKey = process.env.GEMINI_API_KEY;
+
+  if (!apiKey) {
+    throw new MissingGeminiApiKeyError();
+  }
+
+  const genAI = new GoogleGenerativeAI(apiKey);
+
   return genAI.getGenerativeModel({
     model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash",
     generationConfig: {

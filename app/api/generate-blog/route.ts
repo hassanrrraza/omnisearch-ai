@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getGeminiModel } from "@/lib/gemini";
+import { getGeminiModel, MissingGeminiApiKeyError } from "@/lib/gemini";
 import { buildCreateBlogPrompt } from "@/lib/prompts/create-blog";
 import { BlogInputSchema } from "@/lib/schemas/blog-input-schema";
 import { BlogOutputSchema } from "@/lib/schemas/blog-output-schema";
@@ -68,6 +68,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ data: validated.data });
   } catch (error) {
+    if (error instanceof MissingGeminiApiKeyError) {
+      return NextResponse.json(
+        {
+          error: "Demo deployment only.",
+          hint: "Clone OmniSearch AI and add your own GEMINI_API_KEY locally to generate content.",
+        },
+        { status: 503 }
+      );
+    }
+
     console.error("[generate-blog] error:", error);
     return NextResponse.json(
       { error: "Internal server error. Check server logs." },

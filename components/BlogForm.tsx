@@ -89,10 +89,12 @@ export function BlogForm({ onResult, onLoading }: BlogFormProps) {
       const payload = (await response.json()) as {
         data?: BlogOutput;
         error?: string;
+        hint?: string;
       };
 
       if (!response.ok || !payload.data) {
-        throw new Error(payload.error ?? "Failed to generate blog.");
+        const message = payload.error ?? "Failed to generate blog.";
+        throw new Error(payload.hint ? `${message} ${payload.hint}` : message);
       }
 
       onResult(payload.data);

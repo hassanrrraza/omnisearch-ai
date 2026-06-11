@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getGeminiModel } from "@/lib/gemini";
+import { getGeminiModel, MissingGeminiApiKeyError } from "@/lib/gemini";
 import { buildOptimizeBlogContentPrompt } from "@/lib/prompts/optimize-blog-content";
 import { buildOptimizeBlogReportPrompt } from "@/lib/prompts/optimize-blog-report";
 import { OptimizedBlogContentSchema } from "@/lib/schemas/optimized-blog-content-schema";
@@ -104,6 +104,16 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ data: validated.data });
   } catch (error) {
+    if (error instanceof MissingGeminiApiKeyError) {
+      return NextResponse.json(
+        {
+          error: "Demo deployment only.",
+          hint: "Clone OmniSearch AI and add your own GEMINI_API_KEY locally to optimize content.",
+        },
+        { status: 503 }
+      );
+    }
+
     if (error instanceof Error && error.message === "INVALID_CONTENT_JSON") {
       return NextResponse.json(
         {

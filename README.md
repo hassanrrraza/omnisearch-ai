@@ -132,6 +132,11 @@ GEMINI_MODEL=gemini-2.5-flash
 
 Replace `your_gemini_api_key_here` with the API key you obtained from Google AI Studio.
 
+> **Deploying a public demo?** You do not need to add a production API key.
+> Without `GEMINI_API_KEY`, the app still builds and deploys as a showcase. The
+> generation endpoints return a local-setup message until users clone the repo
+> and add their own key in `.env.local`.
+
 **4. Start the application**
 
 ```bash
