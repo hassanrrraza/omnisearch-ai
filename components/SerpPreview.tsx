@@ -15,55 +15,44 @@ export function SerpPreview({
 }: SerpPreviewProps) {
   const titleTooLong = seoTitle.length > 65;
   const metaTooLong = metaDescription.length > 160;
-  const displayTitle =
-    seoTitle.length > 65 ? `${seoTitle.slice(0, 62)}...` : seoTitle;
+  const cleanSlug = slug.replace(/^\/+/, "");
 
   return (
-    <section className="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm">
-      <p className="text-xs text-neutral-400">Search Preview</p>
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold text-slate-950">SERP Preview</p>
+          <p className="mt-1 text-xs text-slate-500">
+            A lightweight search-result style preview for your metadata.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <StatPill ok={!titleTooLong}>Title {seoTitle.length}/65</StatPill>
+          <StatPill ok={!metaTooLong}>
+            Meta {metaDescription.length}/160
+          </StatPill>
+        </div>
+      </div>
 
-      <div className="mt-4 font-[Arial,sans-serif]">
-        <div className="flex items-center gap-2">
-          <span className="h-3.5 w-3.5 rounded-full bg-neutral-300" />
-          <div>
-            <p className="text-sm text-neutral-800">{domain}</p>
-            <p className="text-sm text-green-700">
-              {domain} › blogs › {slug}
+      <div className="mt-5 rounded-xl border border-slate-100 bg-slate-50/80 p-4 font-[Arial,sans-serif]">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600">
+            {domain.slice(0, 1).toUpperCase()}
+          </span>
+          <div className="min-w-0">
+            <p className="truncate text-sm text-slate-800">{domain}</p>
+            <p className="break-words text-xs leading-5 text-emerald-700">
+              {domain} / blog / {cleanSlug || "optimized-post"}
             </p>
           </div>
         </div>
 
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          <p className="cursor-pointer text-[20px] leading-6 text-[#1a0dab] hover:underline">
-            {displayTitle}
-          </p>
-          {titleTooLong ? (
-            <span className="text-xs font-medium text-orange-600">
-              ⚠ Title too long
-            </span>
-          ) : null}
-        </div>
-
-        <p className="mt-1 line-clamp-2 text-sm leading-5 text-[#4d5156]">
+        <p className="mt-3 break-words text-xl leading-7 text-blue-700">
+          {seoTitle}
+        </p>
+        <p className="mt-1 break-words text-sm leading-6 text-slate-600">
           {metaDescription}
         </p>
-        <div className="mt-1 flex flex-wrap items-center gap-2">
-          <p className="text-xs text-neutral-400">
-            {metaDescription.length} / 160 characters
-          </p>
-          {metaTooLong ? (
-            <span className="text-xs font-medium text-orange-600">
-              ⚠ Too long
-            </span>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        <StatPill ok={!titleTooLong}>Title: {seoTitle.length} chars</StatPill>
-        <StatPill ok={!metaTooLong}>
-          Meta: {metaDescription.length} chars
-        </StatPill>
       </div>
     </section>
   );
@@ -78,8 +67,8 @@ function StatPill({
 }) {
   return (
     <span
-      className={`rounded-full px-3 py-1 text-xs font-medium ${
-        ok ? "bg-green-50 text-green-700" : "bg-orange-50 text-orange-700"
+      className={`rounded-full px-3 py-1 text-xs font-semibold ${
+        ok ? "bg-teal-50 text-teal-700" : "bg-amber-50 text-amber-700"
       }`}
     >
       {children}

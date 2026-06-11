@@ -42,26 +42,33 @@ interface ExportButtonsProps {
 const categories: Array<{
   key: keyof Pick<ScoreSet, "seo" | "aeo" | "geo" | "llm">;
   label: string;
+  description: string;
 }> = [
-  { key: "seo", label: "SEO" },
-  { key: "aeo", label: "AEO" },
-  { key: "geo", label: "GEO" },
-  { key: "llm", label: "LLM" },
+  { key: "seo", label: "SEO Score", description: "Search visibility" },
+  { key: "aeo", label: "AEO Score", description: "Answer readiness" },
+  { key: "geo", label: "GEO Score", description: "Generative engine fit" },
+  { key: "llm", label: "LLM Score", description: "AI readability" },
 ];
 
 export function ScoreCards({ score }: ScoreCardsProps) {
   return (
     <div className="grid gap-3">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+      <ScoreCard
+        description="Average quality across SEO, AEO, GEO, and LLM readiness"
+        label="Overall Score"
+        large
+        value={score.overall}
+      />
+      <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
         {categories.map((category) => (
           <ScoreCard
+            description={category.description}
             key={category.key}
             label={category.label}
             value={score[category.key]}
           />
         ))}
       </div>
-      <ScoreCard label="Overall Score" large value={score.overall} />
     </div>
   );
 }
@@ -76,10 +83,15 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
   );
   const markdown = data.blogMarkdown ?? data.optimizedBlogMarkdown ?? "";
   const safeSlug = data.slug || "optimized-blog";
+  const hasMarkdown = markdown.trim().length > 0;
 
   async function copyMarkdown() {
+    if (!hasMarkdown) {
+      return;
+    }
+
     await navigator.clipboard.writeText(markdown);
-    setCopyMarkdownLabel("Copied!");
+    setCopyMarkdownLabel("Copied");
     window.setTimeout(() => setCopyMarkdownLabel("Copy Markdown"), 2000);
   }
 
@@ -96,7 +108,7 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
     };
 
     await navigator.clipboard.writeText(JSON.stringify(metadata, null, 2));
-    setCopyMetadataLabel("Copied!");
+    setCopyMetadataLabel("Copied");
     window.setTimeout(
       () => setCopyMetadataLabel("Copy Metadata JSON"),
       2000
@@ -107,114 +119,133 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
     await navigator.clipboard.writeText(
       JSON.stringify(data.schemaJsonLd ?? {}, null, 2)
     );
-    setCopySchemaLabel("Copied!");
+    setCopySchemaLabel("Copied");
     window.setTimeout(() => setCopySchemaLabel("Copy Schema JSON-LD"), 2000);
   }
 
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-      <button
-        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-        onClick={copyMarkdown}
-        type="button"
-      >
-        {copyMarkdownLabel}
-      </button>
-      <button
-        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-        onClick={() =>
-          downloadFile(markdown, `${safeSlug}.md`, "text/markdown")
-        }
-        type="button"
-      >
-        Download .md
-      </button>
-      <button
-        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-        onClick={() =>
-          downloadFile(
-            markdownToBasicHtml(markdown, title),
-            `${safeSlug}.html`,
-            "text/html"
-          )
-        }
-        type="button"
-      >
-        Download .html
-      </button>
-      <button
-        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-        onClick={() =>
-          downloadFile(
-            markdownToMdx(markdown, {
-              title,
-              slug: data.slug,
-              seoTitle: data.seoTitle,
-              metaDescription: data.metaDescription,
-              targetKeyword: data.targetKeyword,
-              excerpt: data.excerpt,
-            }),
-            `${safeSlug}.mdx`,
-            "text/markdown"
-          )
-        }
-        type="button"
-      >
-        Download .mdx
-      </button>
-      <button
-        className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-        onClick={copyMetadata}
-        type="button"
-      >
-        {copyMetadataLabel}
-      </button>
-      {data.schemaJsonLd ? (
-        <button
-          className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
-          onClick={copySchema}
-          type="button"
+    <section className="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold text-slate-950">Export Package</p>
+          <p className="mt-1 text-xs text-slate-500">
+            Copy or download the content and publishing metadata.
+          </p>
+        </div>
+      </div>
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <ActionButton disabled={!hasMarkdown} onClick={copyMarkdown}>
+          {copyMarkdownLabel}
+        </ActionButton>
+        <ActionButton
+          disabled={!hasMarkdown}
+          onClick={() =>
+            downloadFile(markdown, `${safeSlug}.md`, "text/markdown")
+          }
         >
-          {copySchemaLabel}
-        </button>
-      ) : null}
-    </div>
+          Download .md
+        </ActionButton>
+        <ActionButton
+          disabled={!hasMarkdown}
+          onClick={() =>
+            downloadFile(
+              markdownToBasicHtml(markdown, title),
+              `${safeSlug}.html`,
+              "text/html"
+            )
+          }
+        >
+          Download .html
+        </ActionButton>
+        <ActionButton
+          disabled={!hasMarkdown}
+          onClick={() =>
+            downloadFile(
+              markdownToMdx(markdown, {
+                title,
+                slug: data.slug,
+                seoTitle: data.seoTitle,
+                metaDescription: data.metaDescription,
+                targetKeyword: data.targetKeyword,
+                excerpt: data.excerpt,
+              }),
+              `${safeSlug}.mdx`,
+              "text/markdown"
+            )
+          }
+        >
+          Download .mdx
+        </ActionButton>
+        <ActionButton onClick={copyMetadata}>{copyMetadataLabel}</ActionButton>
+        {data.schemaJsonLd ? (
+          <ActionButton onClick={copySchema}>{copySchemaLabel}</ActionButton>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function ActionButton({
+  children,
+  disabled,
+  onClick,
+}: {
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      className="inline-flex min-h-10 items-center justify-center rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50"
+      disabled={disabled}
+      onClick={onClick}
+      type="button"
+    >
+      {children}
+    </button>
   );
 }
 
 function ScoreCard({
+  description,
   label,
   large,
   value,
 }: {
+  description: string;
   label: string;
   large?: boolean;
   value: number;
 }) {
+  const roundedValue = Math.round(value);
+
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-4">
-      <p
-        className={`font-semibold text-neutral-900 ${
-          large ? "text-base" : "text-sm"
-        }`}
-      >
-        {label}
-      </p>
-      <div className="mt-3 flex items-end gap-1">
-        <span
-          className={`font-bold tracking-tight text-neutral-950 ${
-            large ? "text-4xl" : "text-3xl"
-          }`}
-        >
-          {Math.round(value)}
-        </span>
-        <span className="pb-1 text-sm text-neutral-500">/100</span>
+    <div
+      className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${
+        large ? "sm:flex sm:items-center sm:justify-between" : ""
+      }`}
+    >
+      <div>
+        <p className="text-sm font-semibold text-slate-950">{label}</p>
+        <p className="mt-1 text-xs text-slate-500">{description}</p>
       </div>
-      <div className="mt-3 h-2 overflow-hidden rounded-full bg-neutral-100">
-        <div
-          className={`h-full rounded-full ${scoreColor(value)}`}
-          style={{ width: `${clampScore(value)}%` }}
-        />
+      <div className={large ? "mt-4 sm:mt-0 sm:min-w-48" : "mt-4"}>
+        <div className="flex items-end gap-1">
+          <span
+            className={`font-bold tracking-tight text-slate-950 ${
+              large ? "text-5xl" : "text-3xl"
+            }`}
+          >
+            {roundedValue}
+          </span>
+          <span className="pb-1 text-sm text-slate-500">/100</span>
+        </div>
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div
+            className={`h-full rounded-full ${scoreColor(value)}`}
+            style={{ width: `${clampScore(value)}%` }}
+          />
+        </div>
       </div>
     </div>
   );
@@ -226,11 +257,11 @@ function clampScore(value: number): number {
 
 function scoreColor(value: number): string {
   if (value >= 90) {
-    return "bg-green-500";
+    return "bg-teal-500";
   }
 
   if (value >= 70) {
-    return "bg-yellow-500";
+    return "bg-amber-500";
   }
 
   if (value >= 50) {
