@@ -67,32 +67,116 @@ distinct discovery channels that most creators ignore:
 
 ---
 
-## Quick Start
+## Project Structure
 
-**Requirements:** Node.js 18+ · A free [Gemini API key](https://aistudio.google.com/app/apikey)
+Here's an overview of the key directories and files in the project:
 
-```bash
-git clone https://github.com/hassanrrraza/omnisearch-ai
-cd omnisearch-ai
-npm install
-cp .env.example .env.local
-```
-
-Open `.env.local` and add your key:
-
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-Start the app:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) and you are ready.
+*   `app/`: Contains the Next.js application's pages and API routes.
+    *   `api/`: API routes for content generation and optimization.
+    *   `new-blog/`: Page for creating new blog posts.
+    *   `optimize-blog/`: Page for optimizing existing blog posts.
+*   `cli/`: Command-line interface tools.
+    *   `index.js`, `index.ts`: Entry points for the CLI.
+*   `components/`: React components used throughout the application.
+*   `input/`: Example input files for generation and optimization.
+*   `lib/`: Core logic and utilities.
+    *   `gemini.ts`: Gemini API integration.
+    *   `file-mode/`: Logic for file-based generation and optimization.
+    *   `guides/`: Optimization guides used as system context for Gemini.
+    *   `prompts/`: Gemini prompt definitions.
+    *   `schemas/`: Zod schemas for input and output validation.
+    *   `utils/`: General utility functions.
+*   `output/`: Directory for output files (e.g., generated blogs).
+*   `public/`: Static assets.
+*   `scripts/`: Utility scripts.
 
 ---
+
+## Quick Start
+
+**Requirements:**
+
+*   [Node.js](https://nodejs.org/en/download/) (version 18 or higher). You can check your version with `node -v`.
+*   A free [Gemini API key](https://aistudio.google.com/app/apikey). Follow the instructions on the Google AI Studio page to generate your API key.
+
+### Setup Steps
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/hassanrrraza/omnisearch-ai
+    cd omnisearch-ai
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Configure your Gemini API Key:**
+
+    Copy the example environment file and then open `.env.local` to add your Gemini API key:
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    Then, edit `.env.local`:
+
+    ```env
+    GEMINI_API_KEY=your_gemini_api_key_here
+    ```
+
+    Replace `your_gemini_api_key_here` with the API key you obtained from Google AI Studio.
+
+4.  **Start the application:**
+
+    ```bash
+    npm run dev
+    ```
+
+    The application will be accessible at [http://localhost:3000](http://localhost:3000).
+
+
+
+## CLI Usage
+
+OmniSearch AI provides command-line interface (CLI) tools for generating and optimizing content directly from your terminal.
+
+### Generate New Blog Post
+
+To generate a new blog post using a JSON input file:
+
+```bash
+npm run generate <path-to-your-input.json>
+```
+
+Example input file (`new-blog.example.json`):
+```json
+{
+  "title": "Your Blog Post Title",
+  "keyword": "your primary keyword",
+  "wordCount": 1500
+}
+```
+
+### Optimize Existing Blog Post
+
+To optimize an existing blog post from a Markdown file:
+
+```bash
+npm run optimize:file <path-to-your-existing-blog.md> <path-to-your-config.json>
+```
+
+Example config file (`optimize-config.example.json`):
+```json
+{
+  "focusKeywords": ["keyword1", "keyword2"],
+  "targetAudience": "developers",
+  "toneOfVoice": "informative"
+}
+```
 
 ## How It Works
 
@@ -250,44 +334,6 @@ omnisearch-ai/
 
 ---
 
-## Roadmap
-
-### ✅ Phase 1 — Core Engine
-
-- [x] New blog generator with full output bundle
-- [x] Gemini API integration (server-side)
-- [x] SEO + AEO + GEO guide injection
-- [x] Structured JSON output with Zod validation
-
-### ✅ Phase 2 — Full Output
-
-- [x] Optimize existing blog flow
-- [x] Score cards (SEO / AEO / GEO / LLM / Overall)
-- [x] Export: copy MD · download .md · download .html
-- [x] Optimization report + change log
-
-### 🔄 Phase 3 — Polish (current)
-
-- [x] SERP-style preview
-- [ ] WordPress-ready export
-- [ ] MDX export
-
-### 📋 Phase 4 — Power Modes
-
-- [ ] CLI: `npx omnisearch-ai new` / `npx omnisearch-ai optimize`
-- [ ] File mode: `/input` → `/output` pipeline
-- [ ] Batch optimization
-- [ ] GitHub Action for automated blog optimization
-
-### 💡 Phase 5 — Advanced
-
-- [ ] Brand voice presets
-- [ ] Competitor URL input
-- [ ] Content gap analysis
-- [ ] Multi-language optimization
-- [ ] AI crawler readability score
-
----
 
 ## Contributing
 
