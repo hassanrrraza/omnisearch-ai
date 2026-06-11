@@ -5,7 +5,7 @@
 **The open-source engine for SEO, AEO, GEO, and LLM content optimization.**
 
 Generate or upgrade blog posts that rank on Google, appear in AI Overviews,
-get cited by ChatGPT and Perplexity, and surface in LLM-powered search -
+get cited by ChatGPT and Perplexity, and surface in LLM-powered search —
 all powered by your own Gemini API key.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
@@ -22,13 +22,29 @@ all powered by your own Gemini API key.
 
 ---
 
+## Table of Contents
+
+- [Why OmniSearch AI?](#why-omnisearch-ai)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Command-Line Interface](#command-line-interface)
+- [How It Works](#how-it-works)
+- [Customize the Optimization Engine](#customize-the-optimization-engine)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Contributing](#contributing)
+- [Maintainer](#maintainer)
+- [License](#license)
+
+---
+
 ## Why OmniSearch AI?
 
 Most AI writing tools generate content. OmniSearch AI optimizes it across four
 distinct discovery channels that most creators ignore:
 
 | Channel | What it means | OmniSearch AI output |
-|---|---|---|
+| :------ | :------------ | :------------------- |
 | **SEO** | Rank on Google | Title tag, meta, slug, keyword placement, schema |
 | **AEO** | Appear in AI Overviews & answer boxes | Featured snippet, FAQPage schema, PAA-ready FAQ |
 | **GEO** | Get cited by ChatGPT, Perplexity, Claude | Factual density, comparison tables, LLM summary |
@@ -44,11 +60,11 @@ distinct discovery channels that most creators ignore:
 
 - Generate a complete blog post up to 2,500 words from a title + keyword
 - SEO title, meta description, and URL slug auto-generated
-- Featured snippet answer block (40-60 words, Google-extractable)
+- Featured snippet answer block (40–60 words, Google-extractable)
 - 3-question FAQ section from real PAA (People Also Ask) patterns
 - FAQPage + BreadcrumbList JSON-LD schema ready to paste into your site
 - LLM Summary for AI system comprehension and citation
-- Optimization score across SEO / AEO / GEO / LLM (0-100 each)
+- Optimization score across SEO / AEO / GEO / LLM (0–100 each)
 
 ### ✦ Optimize Existing Blog
 
@@ -67,80 +83,55 @@ distinct discovery channels that most creators ignore:
 
 ---
 
-## Project Structure
-
-Here's an overview of the key directories and files in the project:
-
-*   `app/`: Contains the Next.js application's pages and API routes.
-    *   `api/`: API routes for content generation and optimization.
-    *   `new-blog/`: Page for creating new blog posts.
-    *   `optimize-blog/`: Page for optimizing existing blog posts.
-*   `cli/`: Command-line interface tools.
-    *   `index.js`, `index.ts`: Entry points for the CLI.
-*   `components/`: React components used throughout the application.
-*   `input/`: Example input files for generation and optimization.
-*   `lib/`: Core logic and utilities.
-    *   `gemini.ts`: Gemini API integration.
-    *   `file-mode/`: Logic for file-based generation and optimization.
-    *   `guides/`: Optimization guides used as system context for Gemini.
-    *   `prompts/`: Gemini prompt definitions.
-    *   `schemas/`: Zod schemas for input and output validation.
-    *   `utils/`: General utility functions.
-*   `output/`: Directory for output files (e.g., generated blogs).
-*   `public/`: Static assets.
-*   `scripts/`: Utility scripts.
-
----
-
 ## Quick Start
 
-**Requirements:**
+### Requirements
 
-*   [Node.js](https://nodejs.org/en/download/) (version 18 or higher). You can check your version with `node -v`.
-*   A free [Gemini API key](https://aistudio.google.com/app/apikey). Follow the instructions on the Google AI Studio page to generate your API key.
+- [Node.js](https://nodejs.org/en/download/) (version 18 or higher). Check your version with `node -v`.
+- A free [Gemini API key](https://aistudio.google.com/app/apikey). Follow the instructions on the Google AI Studio page to generate your API key.
 
 ### Setup Steps
 
-1.  **Clone the repository:**
+**1. Clone the repository**
 
-    ```bash
-    git clone https://github.com/hassanrrraza/omnisearch-ai
-    cd omnisearch-ai
-    ```
+```bash
+git clone https://github.com/hassanrrraza/omnisearch-ai
+cd omnisearch-ai
+```
 
-2.  **Install dependencies:**
+**2. Install dependencies**
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
-3.  **Configure your Gemini API Key:**
+**3. Configure your Gemini API key**
 
-    Copy the example environment file and then open `.env.local` to add your Gemini API key:
+Copy the example environment file, then open `.env.local` to add your Gemini API key:
 
-    ```bash
-    cp .env.example .env.local
-    ```
+```bash
+cp .env.example .env.local
+```
 
-    Then, edit `.env.local`:
+Edit `.env.local`:
 
-    ```env
-    GEMINI_API_KEY=your_gemini_api_key_here
-    ```
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
-    Replace `your_gemini_api_key_here` with the API key you obtained from Google AI Studio.
+Replace `your_gemini_api_key_here` with the API key you obtained from Google AI Studio.
 
-4.  **Start the application:**
+**4. Start the application**
 
-    ```bash
-    npm run dev
-    ```
+```bash
+npm run dev
+```
 
-    The application will be accessible at [http://localhost:3000](http://localhost:3000).
+The application will be accessible at [http://localhost:3000](http://localhost:3000).
 
+---
 
-
-## CLI Usage
+## Command-Line Interface
 
 OmniSearch AI provides command-line interface (CLI) tools for generating and optimizing content directly from your terminal.
 
@@ -152,7 +143,8 @@ To generate a new blog post using a JSON input file:
 npm run generate <path-to-your-input.json>
 ```
 
-Example input file (`new-blog.example.json`):
+**Example input file** (`new-blog.example.json`):
+
 ```json
 {
   "title": "Your Blog Post Title",
@@ -169,7 +161,8 @@ To optimize an existing blog post from a Markdown file:
 npm run optimize:file <path-to-your-existing-blog.md> <path-to-your-config.json>
 ```
 
-Example config file (`optimize-config.example.json`):
+**Example config file** (`optimize-config.example.json`):
+
 ```json
 {
   "focusKeywords": ["keyword1", "keyword2"],
@@ -178,39 +171,9 @@ Example config file (`optimize-config.example.json`):
 }
 ```
 
-## How It Works
+### File Mode (No Browser Required)
 
-OmniSearch AI injects three optimization guides as system context into every
-Gemini prompt. The guides encode rules for SEO, AEO, and GEO. Gemini applies
-them to generate or improve your content.
-
-```text
-User Input
-↓
-Form Validation (Zod)
-↓
-Load SEO + AEO + GEO Guides from lib/guides/
-↓
-Build Prompt (lib/prompts/)
-↓
-Call Gemini API (server-side only - key never exposed)
-↓
-Validate JSON Response (Zod)
-↓
-Render: Blog · Metadata · FAQ · Schema · LLM Summary · Score
-↓
-Export: .md · .html · clipboard
-```
-
-**Your API key never leaves your machine.** All Gemini calls go through the
-Next.js API route. The key is only read server-side from `.env.local`.
-
----
-
-## File Mode (No Browser Required)
-
-Drop a JSON file in `/input`, run one command, and get your full output in
-`/output`.
+Drop a JSON file in `/input`, run one command, and get your full output in `/output`.
 
 **Setup:**
 
@@ -256,9 +219,7 @@ cp input/optimize-config.example.json input/optimize-config.json
 npm run optimize:file
 ```
 
----
-
-## CLI Mode
+### CLI Mode
 
 ```bash
 # From inside the project directory:
@@ -269,6 +230,35 @@ npx omnisearch-ai optimize
 npm run generate
 npm run optimize:file
 ```
+
+---
+
+## How It Works
+
+OmniSearch AI injects three optimization guides as system context into every
+Gemini prompt. The guides encode rules for SEO, AEO, and GEO. Gemini applies
+them to generate or improve your content.
+
+```text
+User Input
+    ↓
+Form Validation (Zod)
+    ↓
+Load SEO + AEO + GEO Guides from lib/guides/
+    ↓
+Build Prompt (lib/prompts/)
+    ↓
+Call Gemini API (server-side only — key never exposed)
+    ↓
+Validate JSON Response (Zod)
+    ↓
+Render: Blog · Metadata · FAQ · Schema · LLM Summary · Score
+    ↓
+Export: .md · .html · clipboard
+```
+
+**Your API key never leaves your machine.** All Gemini calls go through the
+Next.js API route. The key is only read server-side from `.env.local`.
 
 ---
 
@@ -289,21 +279,33 @@ optimization methodology.
 
 ---
 
-## Tech Stack
+## Project Structure
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript (strict mode) |
-| Styling | Tailwind CSS |
-| AI Engine | Google Gemini 2.0 Flash |
-| Validation | Zod |
-| Forms | React Hook Form |
-| Markdown | react-markdown |
+### Directory Overview
 
----
+Here's an overview of the key directories and files in the project:
 
-## Folder Structure
+| Path | Description |
+| :--- | :---------- |
+| `app/` | Next.js application pages and API routes |
+| `app/api/` | API routes for content generation and optimization |
+| `app/new-blog/` | Page for creating new blog posts |
+| `app/optimize-blog/` | Page for optimizing existing blog posts |
+| `cli/` | Command-line interface tools (`index.js`, `index.ts` entry points) |
+| `components/` | React components used throughout the application |
+| `input/` | Example input files for generation and optimization |
+| `lib/` | Core logic and utilities |
+| `lib/gemini.ts` | Gemini API integration |
+| `lib/file-mode/` | Logic for file-based generation and optimization |
+| `lib/guides/` | Optimization guides used as system context for Gemini |
+| `lib/prompts/` | Gemini prompt definitions |
+| `lib/schemas/` | Zod schemas for input and output validation |
+| `lib/utils/` | General utility functions |
+| `output/` | Directory for output files (e.g., generated blogs) |
+| `public/` | Static assets |
+| `scripts/` | Utility scripts |
+
+### Detailed Layout
 
 ```text
 omnisearch-ai/
@@ -334,6 +336,19 @@ omnisearch-ai/
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+| :---- | :--------- |
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict mode) |
+| Styling | Tailwind CSS |
+| AI Engine | Google Gemini 2.0 Flash |
+| Validation | Zod |
+| Forms | React Hook Form |
+| Markdown | react-markdown |
+
+---
 
 ## Contributing
 
