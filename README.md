@@ -18,6 +18,10 @@ all powered by your own Gemini API key.
 [Report a Bug](https://github.com/hassanrrraza/omnisearch-ai/issues/new?template=bug_report.md) ·
 [Request a Feature](https://github.com/hassanrrraza/omnisearch-ai/issues/new?template=feature_request.md)
 
+<br>
+
+<img src="public/images/1.webp" alt="OmniSearch AI product screenshot" width="900">
+
 </div>
 
 ---
