@@ -24,6 +24,7 @@ export type PreviewData = {
   excerpt: string;
   featuredSnippet: string;
   llmSummary: string;
+  schemaJsonLd?: unknown;
   blogMarkdown?: string;
   optimizedBlogMarkdown?: string;
   score: ScoreSet;
@@ -70,6 +71,9 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
   const [copyMetadataLabel, setCopyMetadataLabel] = useState(
     "Copy Metadata JSON"
   );
+  const [copySchemaLabel, setCopySchemaLabel] = useState(
+    "Copy Schema JSON-LD"
+  );
   const markdown = data.blogMarkdown ?? data.optimizedBlogMarkdown ?? "";
   const safeSlug = data.slug || "optimized-blog";
 
@@ -97,6 +101,14 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
       () => setCopyMetadataLabel("Copy Metadata JSON"),
       2000
     );
+  }
+
+  async function copySchema() {
+    await navigator.clipboard.writeText(
+      JSON.stringify(data.schemaJsonLd ?? {}, null, 2)
+    );
+    setCopySchemaLabel("Copied!");
+    window.setTimeout(() => setCopySchemaLabel("Copy Schema JSON-LD"), 2000);
   }
 
   return (
@@ -157,6 +169,15 @@ export function ExportButtons({ data, title }: ExportButtonsProps) {
       >
         {copyMetadataLabel}
       </button>
+      {data.schemaJsonLd ? (
+        <button
+          className="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-800 transition hover:border-neutral-300 hover:bg-neutral-50"
+          onClick={copySchema}
+          type="button"
+        >
+          {copySchemaLabel}
+        </button>
+      ) : null}
     </div>
   );
 }

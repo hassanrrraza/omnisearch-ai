@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { ExportButtons, ScoreCards } from "@/components/PreviewActions";
 import { SerpPreview } from "@/components/SerpPreview";
@@ -19,6 +19,13 @@ const tabs = [
   "FAQ + Snippet",
   "Report",
 ];
+const loadingMessages = [
+  "Analyzing your existing blog...",
+  "Improving structure, headings, and search intent...",
+  "Optimizing for SEO, AEO, GEO, and LLM visibility...",
+  "Generating metadata, FAQ, schema, and scoring report...",
+  "Finalizing your optimized article...",
+];
 
 export function OptimizeOutputPreview({
   data,
@@ -27,6 +34,22 @@ export function OptimizeOutputPreview({
 }: OptimizeOutputPreviewProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const loadingMessage = loadingMessages[loadingMessageIndex];
+
+  useEffect(() => {
+    if (!loading) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingMessageIndex(
+        (current) => (current + 1) % loadingMessages.length
+      );
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, [loading]);
 
   if (!data && !loading) {
     return (
@@ -67,10 +90,11 @@ export function OptimizeOutputPreview({
           <div className="h-28 rounded bg-neutral-100" />
         </div>
         <h2 className="mt-6 text-lg font-semibold text-neutral-950">
-          Optimizing your blog...
+          {loadingMessage}
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-neutral-500">
-          Applying SEO, AEO, GEO, and LLM rules. This takes 20-40 seconds.
+          OmniSearch AI optimizes the article first, then generates metadata,
+          FAQ, schema, scores, and the report.
         </p>
       </CenteredState>
     );
