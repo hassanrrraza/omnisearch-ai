@@ -8,6 +8,7 @@
   --muted: #64748b;
   --brand: #14b8a6;
   --brand-strong: #0f766e;
+  --brand-deep: #064e3b;
   --ink: #0f172a;
 }
 
@@ -1011,21 +1012,34 @@ body {
   color: #ffffff;
   font-size: 0.94rem;
   font-weight: 800;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .brand-mark {
+  position: relative;
   display: inline-flex;
   width: 2.55rem;
   height: 2.55rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(94, 234, 212, 0.42);
+  border-radius: 0.72rem;
+  isolation: isolate;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(204, 251, 241, 0.92));
-  color: #020617;
-  box-shadow: 0 18px 52px rgba(20, 184, 166, 0.16);
+    radial-gradient(circle at 28% 22%, rgba(240, 253, 250, 0.34), transparent 1.15rem),
+    linear-gradient(145deg, rgba(6, 78, 59, 0.98), rgba(15, 118, 110, 0.96) 52%, rgba(20, 184, 166, 0.92));
+  color: #ecfeff;
+  font-size: 0.83rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  text-shadow: 0 1px 10px rgba(4, 47, 46, 0.52);
+  box-shadow:
+    0 0 0 4px rgba(6, 78, 59, 0.2),
+    0 16px 42px rgba(6, 78, 59, 0.38),
+    inset 0 0 0 1px rgba(204, 251, 241, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 .brand-subtitle {
