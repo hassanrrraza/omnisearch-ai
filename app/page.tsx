@@ -5,47 +5,55 @@ const hassanUrl = "https://hassanr.com/";
 
 const workflowSteps = [
   {
+    output: "Input: topic, audience, intent, links, CTA",
     title: "Add your content context",
     description:
-      "Enter the topic, audience, keywords, intent, links, CTA, or paste an existing article.",
+      "Enter your topic, keyword, audience, search intent, internal links, CTA, or paste an existing article.",
   },
   {
-    title: "Run the optimization engine",
+    output: "Loops: SEO / AEO / GEO / LLM",
+    title: "Run the optimization loops",
     description:
-      "OmniSearch AI applies SEO, AEO, GEO, and LLM optimization loops using the included guide files and prompt workflow.",
+      "The engine applies SEO, AEO, GEO, and LLM-focused prompt workflows using the included optimization guides.",
   },
   {
+    output: "Package: article, metadata, FAQ, schema, scores",
     title: "Review the content package",
     description:
-      "Get the article, metadata, FAQs, Schema JSON-LD, scoring report, and LLM-ready summary.",
+      "Get the article, metadata, FAQs, schema JSON-LD, featured snippet, scores, and LLM-ready summary.",
   },
   {
+    output: "Exports: MD / HTML / MDX / JSON",
     title: "Export and publish",
     description:
-      "Copy or download Markdown, HTML, MDX, metadata, and schema for your website or blog system.",
+      "Copy or download Markdown, HTML, MDX, metadata, and schema for your blog, CMS, or developer workflow.",
   },
 ];
 
 const differentiators = [
   {
-    title: "Not just blog generation",
+    highlight: "Structured pipeline",
+    title: "Workflow-first, not prompt-only",
     description:
-      "A workflow engine with structured optimization steps for creation, refinement, metadata, scoring, and export.",
+      "Instead of relying on one generic prompt, OmniSearch AI guides content through structured optimization steps for creation, refinement, metadata, scoring, and export.",
   },
   {
-    title: "Search and AI discovery focused",
+    highlight: "SEO / AEO / GEO / LLM",
+    title: "Built for search and AI discovery",
     description:
-      "Designed for Google Search, AI Overviews, answer engines, and content that is easier for LLMs to understand.",
+      "Designed to make content easier to crawl, understand, extract, cite, and surface across Google Search, AI Overviews, answer engines, and LLM-driven discovery.",
   },
   {
+    highlight: "Your key. Your workflow.",
     title: "Open-source and local-first",
     description:
-      "Use your own Gemini API key, inspect the prompts, customize the guides, and adapt the workflow to your stack.",
+      "Bring your own Gemini API key, inspect the prompts, customize the guides, and adapt the workflow to your own stack or publishing system.",
   },
   {
-    title: "Built from real project workflows",
+    highlight: "Proven workflow patterns",
+    title: "Based on real project workflows",
     description:
-      "Based on optimization patterns used in agency and client content systems, packaged into an open-source product.",
+      "Packaged from optimization patterns used in agency and client content systems, then made open-source for builders, creators, founders, and marketers.",
   },
 ];
 
@@ -337,54 +345,80 @@ function WorkflowChoiceCard({
 
 function WorkflowSection() {
   return (
-    <SectionShell
-      eyebrow="Workflow"
-      title="A repeatable optimization system, not a blank prompt box."
-      description="The engine improves the workflow, but the quality of the final output still depends on the quality of the context you provide."
-    >
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <section className="process-section">
+      <div className="process-header">
+        <p className="process-eyebrow">The workflow</p>
+        <h2 className="process-title">
+          A structured pipeline from raw context to publish-ready content.
+        </h2>
+        <p className="process-description">
+          OmniSearch AI guides your input through a repeatable optimization
+          workflow: context collection, SEO/AEO/GEO/LLM optimization, content
+          packaging, and export-ready delivery.
+        </p>
+      </div>
+
+      <div className="process-grid">
         {workflowSteps.map((step, index) => (
           <article
-            className="rounded-2xl border border-white/10 bg-white/[0.06] p-5"
+            className="process-step-card"
             key={step.title}
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sm font-bold text-slate-950">
-              {index + 1}
+            <div className="process-step-top">
+              <span className="process-step-number">
+                {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="mt-5 text-lg font-semibold text-white">
+              {index < workflowSteps.length - 1 ? (
+                <span className="process-connector" aria-hidden="true" />
+              ) : null}
+            </div>
+            <h3 className="process-step-title">
               {step.title}
             </h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
+            <p className="process-step-description">
               {step.description}
             </p>
+            <p className="process-step-output">{step.output}</p>
           </article>
         ))}
       </div>
-    </SectionShell>
+    </section>
   );
 }
 
 function DifferentSection() {
   return (
-    <SectionShell
-      eyebrow="Why it is different"
-      title="Built for search and AI discovery workflows."
-      description="OmniSearch AI is positioned around structured optimization, transparent prompts, and practical publishing outputs."
-    >
-      <div className="grid gap-4 md:grid-cols-2">
-        {differentiators.map((item) => (
-          <article
-            className="rounded-2xl border border-white/10 bg-white/[0.06] p-5"
-            key={item.title}
-          >
-            <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
-              {item.description}
-            </p>
+    <section className="difference-section">
+      <div className="difference-header">
+        <p className="difference-eyebrow">Why it&apos;s different</p>
+        <h2 className="difference-title">
+          Not another AI writer. A structured optimization engine.
+        </h2>
+        <p className="difference-description">
+          Most AI writing tools stop at the draft. OmniSearch AI goes further
+          with a repeatable workflow for content structure, metadata, answer
+          optimization, schema, scoring, and export-ready publishing.
+        </p>
+        <div className="difference-comparison">
+          <span>Generic AI writer: draft only</span>
+          <span aria-hidden="true">→</span>
+          <span>OmniSearch AI: draft + metadata + FAQ + schema + scoring + export</span>
+        </div>
+      </div>
+
+      <div className="difference-grid">
+        {differentiators.map((item, index) => (
+          <article className="difference-card" key={item.title}>
+            <span className="difference-card-marker">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="difference-card-title">{item.title}</h3>
+            <p className="difference-card-description">{item.description}</p>
+            <p className="difference-card-highlight">{item.highlight}</p>
           </article>
         ))}
       </div>
-    </SectionShell>
+    </section>
   );
 }
 
