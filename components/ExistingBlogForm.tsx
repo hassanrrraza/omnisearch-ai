@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import type { z } from "zod";
@@ -19,6 +19,13 @@ const inputClass =
   "mt-2 w-full rounded-lg border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-950 outline-none transition focus:border-neutral-900 focus:ring-2 focus:ring-neutral-900/10";
 const labelClass = "text-sm font-medium text-neutral-900";
 const errorClass = "mt-1 text-sm text-red-500";
+const loadingMessages = [
+  "Analyzing your existing blog...",
+  "Improving structure, headings, and search intent...",
+  "Optimizing for SEO, AEO, GEO, and LLM visibility...",
+  "Generating metadata, FAQ, schema, and scoring report...",
+  "Finalizing your optimized article...",
+];
 type OptimizeFormValues = z.input<typeof OptimizeInputSchema>;
 
 export function ExistingBlogForm({
@@ -27,6 +34,7 @@ export function ExistingBlogForm({
 }: ExistingBlogFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
 
   const {
     register,
@@ -49,9 +57,25 @@ export function ExistingBlogForm({
   });
 
   const existingBlog = useWatch({ control, name: "existingBlog" }) ?? "";
+  const loadingMessage = loadingMessages[loadingMessageIndex];
+
+  useEffect(() => {
+    if (!isOptimizing) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingMessageIndex(
+        (current) => (current + 1) % loadingMessages.length
+      );
+    }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, [isOptimizing]);
 
   async function onSubmit(values: OptimizeInput) {
     setError(null);
+    setLoadingMessageIndex(0);
     setIsOptimizing(true);
     onLoading(true);
 
@@ -98,6 +122,11 @@ export function ExistingBlogForm({
         />
         <p className="mt-1 text-xs text-neutral-500">
           {existingBlog.length.toLocaleString()} / 20,000 characters
+        </p>
+        <p className="mt-2 text-xs leading-5 text-neutral-500">
+          For best results, paste blogs up to 2,500 words. Longer articles may
+          take more time because OmniSearch AI processes optimization and
+          reporting in separate steps.
         </p>
       </Field>
 
@@ -180,7 +209,7 @@ export function ExistingBlogForm({
 
       {isSubmitted || isValid ? (
         <p className="text-center text-xs text-neutral-400">
-          ⏱ Estimated optimization time: 20-40 seconds
+          Estimated optimization time: 30-90 seconds for longer articles
         </p>
       ) : null}
 
@@ -210,7 +239,7 @@ export function ExistingBlogForm({
                 fill="currentColor"
               />
             </svg>
-            Optimizing...
+            {loadingMessage}
           </>
         ) : (
           "✦ Optimize My Blog"
