@@ -11,7 +11,7 @@ all powered by your own Gemini API key.
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://typescriptlang.org)
-[![Gemini API](https://img.shields.io/badge/Gemini-2.0_Flash-blue?logo=google)](https://ai.google.dev)
+[![Gemini API](https://img.shields.io/badge/Gemini-2.5_Flash-blue?logo=google)](https://ai.google.dev)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 [**Try it in 60 seconds**](#quick-start) ·
@@ -127,6 +127,7 @@ Edit `.env.local`:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
 ```
 
 Replace `your_gemini_api_key_here` with the API key you obtained from Google AI Studio.
@@ -353,7 +354,7 @@ omnisearch-ai/
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript (strict mode) |
 | Styling | Tailwind CSS |
-| AI Engine | Google Gemini 2.0 Flash |
+| AI Engine | Google Gemini 2.5 Flash |
 | Validation | Zod |
 | Forms | React Hook Form |
 | Markdown | react-markdown |
