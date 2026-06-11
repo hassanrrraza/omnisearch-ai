@@ -126,28 +126,21 @@ function Hero() {
       <div className="hero-grid">
         <div className="hero-copy">
           <p className="hero-eyebrow">
-            Open-source SEO · AEO · GEO · LLM optimization engine
+            Open-source SEO · AEO · GEO · LLM engine
         </p>
           <h1 className="hero-title">
-            The open-source workflow engine for search-ready, AI-readable
-            content.
+            Optimize content for Google Search and AI discovery.
         </h1>
           <p className="hero-subtitle">
-            Generate new blogs or optimize existing articles with the same
-            structured SEO, AEO, GEO, and LLM content workflow used in real
-            client and agency projects — powered by your own Gemini API key.
+            OmniSearch AI turns blog ideas and existing articles into
+            structured content packages with SEO metadata, FAQs, schema,
+            scoring, and LLM-ready summaries — powered by your own Gemini API
+            key.
         </p>
 
           <p className="hero-package-line">
-            OmniSearch AI helps turn your topic, audience, keywords, links, and
-            CTA into a complete content package: article, metadata, FAQs,
-            schema, scoring report, and export-ready files.
-        </p>
-
-          <p className="hero-insight">
-            Better inputs create better outputs. The engine gives you the
-            workflow, prompts, and optimization loops — your context makes the
-            result stronger.
+            Built from a proven workflow used in real client and agency
+            projects. Better context creates better output.
         </p>
 
           <div className="hero-actions">
@@ -155,7 +148,7 @@ function Hero() {
           <SecondaryLink href="/optimize-blog">
             Optimize Existing Blog
           </SecondaryLink>
-            <GhostLink href={githubUrl}>View GitHub Repo</GhostLink>
+            <GhostLink href={githubUrl}>GitHub</GhostLink>
         </div>
 
           <p className="hero-credit">
@@ -168,7 +161,7 @@ function Hero() {
           >
             Hassan Raza
           </a>{" "}
-            — Full-Stack Engineer & AI Engineer.
+            .
         </p>
       </div>
 
@@ -182,15 +175,15 @@ function WorkflowPreview() {
   const rows = [
     {
       label: "Input",
-      text: "Topic · Keyword · Audience · Intent · Links · CTA",
+      text: "Topic · Keyword · Audience · CTA",
     },
     {
-      label: "Optimization Loops",
+      label: "Optimize",
       text: "SEO · AEO · GEO · LLM",
     },
     {
-      label: "Output Package",
-      text: "Blog · Metadata · FAQ · Schema · Scores",
+      label: "Package",
+      text: "Blog · Metadata · FAQ · Schema",
     },
     {
       label: "Export",
@@ -235,28 +228,110 @@ function WorkflowPreview() {
 
 function FeatureNavigation() {
   return (
-    <SectionShell
-      eyebrow="Start here"
-      title="Choose the workflow that matches your content stage."
-      description="Create something new from structured context, or improve an existing article with a focused optimization pass."
-    >
-      <div className="grid gap-5 lg:grid-cols-2">
-        <FeatureCard
-          button="Create New Blog"
-          description="Generate a complete SEO/AEO/GEO/LLM-ready blog from your topic, keyword, audience, search intent, and CTA."
+    <section className="py-12 sm:py-16 lg:py-20">
+      <div className="mb-6 max-w-3xl sm:mb-8">
+        <p className="text-xs font-extrabold uppercase tracking-wide text-teal-200">
+          Start here
+        </p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+          Choose the right workflow for your content stage.
+        </h2>
+        <p className="mt-4 max-w-2xl text-base leading-8 text-slate-300">
+          Start with a fresh topic or paste an existing article. OmniSearch AI
+          guides both paths through the same SEO, AEO, GEO, and LLM
+          optimization system.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:gap-6">
+        <WorkflowChoiceCard
+          action="Start New Blog"
+          badge="New content"
+          checklist={[
+            "Blog draft",
+            "SEO metadata",
+            "FAQ + schema",
+            "LLM-ready summary",
+          ]}
+          description="Turn your topic, keyword, audience, search intent, links, and CTA into a complete search-ready content package."
           href="/new-blog"
-          label="New content"
+          number="01"
           title="Create a New Blog"
         />
-        <FeatureCard
-          button="Optimize Existing Blog"
-          description="Paste your current article and upgrade it with better structure, metadata, FAQs, schema, scoring, and AI-readable summaries."
+        <WorkflowChoiceCard
+          action="Optimize Existing Blog"
+          badge="Existing content"
+          checklist={[
+            "Content rewrite",
+            "Optimization report",
+            "SEO/AEO/GEO scoring",
+            "Export-ready files",
+          ]}
+          description="Paste an article you already have and upgrade it with stronger structure, metadata, FAQs, schema, scoring, and AI-readable summaries."
           href="/optimize-blog"
-          label="Existing content"
+          number="02"
           title="Optimize an Existing Blog"
         />
       </div>
-    </SectionShell>
+    </section>
+  );
+}
+
+function WorkflowChoiceCard({
+  action,
+  badge,
+  checklist,
+  description,
+  href,
+  number,
+  title,
+}: {
+  action: string;
+  badge: string;
+  checklist: string[];
+  description: string;
+  href: string;
+  number: string;
+  title: string;
+}) {
+  return (
+    <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/20 transition hover:-translate-y-1 hover:border-teal-300/35 hover:bg-white/[0.08] sm:p-7">
+      <div className="pointer-events-none absolute -left-20 -top-20 h-44 w-44 rounded-full bg-teal-300/10 blur-3xl" />
+      <div className="relative flex items-center justify-between gap-4">
+        <span className="rounded-full border border-teal-300/25 bg-teal-300/10 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-teal-200">
+          {badge}
+        </span>
+        <span className="text-xs font-bold uppercase tracking-wide text-slate-500">
+          Workflow {number}
+        </span>
+      </div>
+      <h3 className="relative mt-5 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+        {title}
+      </h3>
+      <p className="relative mt-3 max-w-xl text-sm leading-7 text-slate-300 sm:text-base">
+        {description}
+      </p>
+      <ul className="relative mt-5 grid gap-2 sm:grid-cols-2">
+        {checklist.map((item) => (
+          <li
+            className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2.5 text-sm font-medium text-slate-200"
+            key={item}
+          >
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300"
+            />
+            {item}
+          </li>
+        ))}
+      </ul>
+      <Link
+        className="relative mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-sm font-extrabold text-slate-950 transition hover:bg-teal-100 sm:w-auto"
+        href={href}
+      >
+        {action}
+      </Link>
+    </article>
   );
 }
 
@@ -433,36 +508,6 @@ function SectionShell({
       </div>
       {children}
     </section>
-  );
-}
-
-function FeatureCard({
-  button,
-  description,
-  href,
-  label,
-  title,
-}: {
-  button: string;
-  description: string;
-  href: string;
-  label: string;
-  title: string;
-}) {
-  return (
-    <article className="group rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-6 transition hover:-translate-y-1 hover:border-teal-300/30 hover:bg-white/[0.08] sm:p-7">
-      <p className="text-sm font-semibold uppercase text-teal-200">{label}</p>
-      <h3 className="mt-4 text-2xl font-bold tracking-tight text-white">
-        {title}
-      </h3>
-      <p className="mt-4 text-sm leading-7 text-slate-300">{description}</p>
-      <Link
-        className="mt-6 inline-flex items-center justify-center rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition group-hover:bg-teal-100"
-        href={href}
-      >
-        {button}
-      </Link>
-    </article>
   );
 }
 
