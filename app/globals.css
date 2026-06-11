@@ -1072,9 +1072,9 @@ body {
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(24rem, 0.96fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
+  gap: clamp(1.75rem, 4.4vw, 3.8rem);
   align-items: center;
-  padding: clamp(3.1rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5.5rem);
+  padding: clamp(2.75rem, 6vw, 5rem) 0 clamp(2.6rem, 5.4vw, 4.6rem);
 }
 
 .hero-copy {
@@ -1091,11 +1091,11 @@ body {
   border-radius: 999px;
   background:
     linear-gradient(135deg, rgba(45, 212, 191, 0.16), rgba(255, 255, 255, 0.045));
-  padding: 0.43rem 0.72rem;
+  padding: 0.38rem 0.66rem;
   color: #99f6e4;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 850;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -1108,43 +1108,43 @@ body {
 
 .hero-title {
   max-width: 45rem;
-  margin-top: 1.35rem;
+  margin-top: 1.15rem;
   color: #ffffff;
-  font-size: clamp(2.75rem, 5.8vw, 5.5rem);
+  font-size: clamp(2.25rem, 4.5vw, 4.25rem);
   font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.065em;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
   text-wrap: balance;
 }
 
 .hero-subtitle {
-  max-width: 42rem;
-  margin-top: 1.25rem;
+  max-width: 40rem;
+  margin-top: 1.05rem;
   color: #cbd5e1;
-  font-size: clamp(1rem, 1.45vw, 1.2rem);
-  line-height: 1.76;
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  line-height: 1.65;
 }
 
 .hero-package-line {
-  max-width: 41rem;
-  margin-top: 0.85rem;
+  max-width: 39rem;
+  margin-top: 0.75rem;
   color: #94a3b8;
-  font-size: 0.98rem;
-  line-height: 1.7;
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .hero-actions,
 .final-cta-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.65rem;
+  gap: 0.68rem;
+  margin-top: 1.35rem;
 }
 
 .hero-credit {
-  margin-top: 1rem;
+  margin-top: 0.9rem;
   color: #94a3b8;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   line-height: 1.65;
 }
 
@@ -1164,12 +1164,12 @@ body {
 
 .btn {
   display: inline-flex;
-  min-height: 3rem;
+  min-height: 2.8rem;
   align-items: center;
   justify-content: center;
   border-radius: 0.95rem;
-  padding: 0.86rem 1.15rem;
-  font-size: 0.92rem;
+  padding: 0.78rem 1rem;
+  font-size: 0.88rem;
   font-weight: 850;
   line-height: 1;
   transition:
@@ -1222,7 +1222,7 @@ body {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 2rem;
+  border-radius: 1.7rem;
   background:
     radial-gradient(circle at 50% 0%, rgba(45, 212, 191, 0.18), transparent 17rem),
     linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035)),
@@ -1230,7 +1230,7 @@ body {
   box-shadow:
     0 30px 110px rgba(0, 0, 0, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  padding: clamp(1rem, 2.3vw, 1.45rem);
+  padding: clamp(0.95rem, 2vw, 1.25rem);
   backdrop-filter: blur(20px);
   animation: homepage-rise 850ms 120ms ease both;
 }
@@ -1256,13 +1256,13 @@ body {
 }
 
 .hero-visual-top h2 {
-  max-width: 23rem;
-  margin-top: 0.55rem;
+  max-width: 21rem;
+  margin-top: 0.48rem;
   color: #ffffff;
-  font-size: clamp(1.35rem, 2.5vw, 2.1rem);
+  font-size: clamp(1.12rem, 1.85vw, 1.6rem);
   font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -0.045em;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
 }
 
 .hero-visual-top > span {
@@ -1270,16 +1270,16 @@ body {
   border: 1px solid rgba(94, 234, 212, 0.22);
   border-radius: 999px;
   background: rgba(45, 212, 191, 0.11);
-  padding: 0.45rem 0.7rem;
+  padding: 0.38rem 0.62rem;
   color: #99f6e4;
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 850;
 }
 
 .workflow-graph {
   position: relative;
-  height: clamp(20rem, 42vw, 29rem);
-  margin-top: 1rem;
+  height: clamp(18rem, 36vw, 25rem);
+  margin-top: 0.85rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 1.45rem;
@@ -1427,8 +1427,8 @@ body {
 
 .workflow-console {
   display: grid;
-  gap: 0.55rem;
-  margin-top: 1rem;
+  gap: 0.48rem;
+  margin-top: 0.85rem;
 }
 
 .workflow-console p {
@@ -1438,10 +1438,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.9rem;
   background: rgba(255, 255, 255, 0.045);
-  padding: 0.62rem 0.72rem;
+  padding: 0.54rem 0.66rem;
   color: #cbd5e1;
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   line-height: 1.4;
   opacity: 0;
   animation: homepage-console-in 420ms ease both;
@@ -1459,7 +1459,7 @@ body {
 
 .home-section {
   position: relative;
-  padding: clamp(3.25rem, 7vw, 6.5rem) 0;
+  padding: clamp(2.7rem, 5.8vw, 5.35rem) 0;
 }
 
 .home-section::before {
@@ -1473,27 +1473,27 @@ body {
 }
 
 .section-header {
-  max-width: 52rem;
-  margin-bottom: clamp(1.6rem, 3vw, 2.8rem);
+  max-width: 48rem;
+  margin-bottom: clamp(1.35rem, 2.6vw, 2.25rem);
 }
 
 .section-title {
-  max-width: 48rem;
-  margin-top: 0.9rem;
+  max-width: 44rem;
+  margin-top: 0.78rem;
   color: #ffffff;
-  font-size: clamp(2rem, 4.2vw, 3.45rem);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 900;
-  line-height: 1.03;
-  letter-spacing: -0.05em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .section-description {
-  max-width: 48rem;
-  margin-top: 1rem;
+  max-width: 44rem;
+  margin-top: 0.82rem;
   color: #cbd5e1;
-  font-size: 1rem;
-  line-height: 1.78;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.7;
 }
 
 .premium-card {
@@ -1523,12 +1523,12 @@ body {
 .workflow-card-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
+  gap: clamp(0.9rem, 1.7vw, 1.25rem);
 }
 
 .workflow-choice-card {
-  border-radius: 1.55rem;
-  padding: clamp(1.35rem, 2vw, 2rem);
+  border-radius: 1.35rem;
+  padding: clamp(1.15rem, 1.7vw, 1.55rem);
 }
 
 .workflow-choice-card::before {
@@ -1556,45 +1556,46 @@ body {
   border: 1px solid rgba(94, 234, 212, 0.22);
   border-radius: 999px;
   background: rgba(45, 212, 191, 0.1);
-  padding: 0.38rem 0.68rem;
+  padding: 0.34rem 0.6rem;
   color: #99f6e4;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 850;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
 .workflow-choice-number {
   color: #64748b;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 850;
   text-transform: uppercase;
 }
 
 .workflow-choice-title {
   position: relative;
-  margin-top: 1.35rem;
+  margin-top: 1.1rem;
   color: #ffffff;
-  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-size: clamp(1.08rem, 1.45vw, 1.28rem);
   font-weight: 900;
-  letter-spacing: -0.035em;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
 }
 
 .workflow-choice-description {
   position: relative;
   max-width: 34rem;
-  margin-top: 0.8rem;
+  margin-top: 0.65rem;
   color: #cbd5e1;
-  font-size: 0.96rem;
-  line-height: 1.75;
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .compact-checklist {
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin-top: 1.3rem;
+  gap: 0.55rem;
+  margin-top: 1.05rem;
 }
 
 .compact-checklist li,
@@ -1605,10 +1606,10 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.85rem;
   background: rgba(255, 255, 255, 0.045);
-  padding: 0.68rem 0.75rem;
+  padding: 0.58rem 0.68rem;
   color: #e2e8f0;
-  font-size: 0.86rem;
-  line-height: 1.35;
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .compact-checklist span,
@@ -1624,15 +1625,15 @@ body {
 .workflow-choice-action {
   position: relative;
   display: inline-flex;
-  min-height: 2.85rem;
+  min-height: 2.65rem;
   align-items: center;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 1.15rem;
   border-radius: 0.9rem;
   background: #ffffff;
-  padding: 0.8rem 1.05rem;
+  padding: 0.72rem 0.95rem;
   color: #0f172a;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 900;
   transition:
     background 180ms ease,
@@ -1647,13 +1648,13 @@ body {
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(0.85rem, 1.6vw, 1.25rem);
+  gap: clamp(0.78rem, 1.35vw, 1.05rem);
 }
 
 .process-step-card {
   min-height: 100%;
-  border-radius: 1.35rem;
-  padding: clamp(1.1rem, 1.8vw, 1.45rem);
+  border-radius: 1.2rem;
+  padding: clamp(1rem, 1.55vw, 1.25rem);
 }
 
 .process-step-number,
@@ -1667,7 +1668,7 @@ body {
   border-radius: 0.82rem;
   background: rgba(45, 212, 191, 0.12);
   color: #ccfbf1;
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 900;
 }
 
@@ -1681,46 +1682,48 @@ body {
 
 .process-step-title,
 .difference-card-title {
-  margin-top: 1.15rem;
+  margin-top: 0.95rem;
   color: #ffffff;
-  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
   font-weight: 900;
+  line-height: 1.25;
   letter-spacing: -0.03em;
 }
 
 .process-step-description,
 .difference-card-description {
-  margin-top: 0.72rem;
+  margin-top: 0.62rem;
   color: #cbd5e1;
-  font-size: 0.93rem;
-  line-height: 1.68;
+  font-size: 0.94rem;
+  line-height: 1.62;
 }
 
 .process-step-output,
 .difference-card-highlight {
   width: fit-content;
   max-width: 100%;
-  margin-top: 1rem;
+  margin-top: 0.85rem;
   border: 1px solid rgba(94, 234, 212, 0.18);
   border-radius: 999px;
   background: rgba(45, 212, 191, 0.09);
-  padding: 0.55rem 0.75rem;
+  padding: 0.48rem 0.68rem;
   color: #99f6e4;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 850;
+  letter-spacing: 0.08em;
   line-height: 1.35;
 }
 
 .difference-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.45rem);
+  gap: clamp(0.9rem, 1.75vw, 1.25rem);
 }
 
 .difference-card,
 .output-package-card {
-  border-radius: 1.45rem;
-  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border-radius: 1.3rem;
+  padding: clamp(1.08rem, 1.7vw, 1.45rem);
 }
 
 .difference-comparison {
@@ -1729,13 +1732,13 @@ body {
   max-width: 100%;
   flex-wrap: wrap;
   gap: 0.55rem;
-  margin-top: 1.25rem;
+  margin-top: 1rem;
   border: 1px solid rgba(94, 234, 212, 0.16);
   border-radius: 999px;
   background: rgba(15, 23, 42, 0.56);
-  padding: 0.55rem 0.8rem;
+  padding: 0.5rem 0.72rem;
   color: #dbeafe;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 800;
   line-height: 1.45;
 }
@@ -1747,55 +1750,56 @@ body {
 .output-package-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.45rem);
+  gap: clamp(0.9rem, 1.7vw, 1.2rem);
 }
 
 .output-package-card-title {
   color: #ffffff;
-  font-size: 1.12rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
   font-weight: 900;
+  line-height: 1.25;
   letter-spacing: -0.02em;
 }
 
 .output-package-list {
   display: grid;
-  gap: 0.7rem;
-  margin-top: 1.1rem;
+  gap: 0.58rem;
+  margin-top: 0.9rem;
 }
 
 .output-package-list li {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   color: #dbe3ef;
   font-size: 0.92rem;
-  line-height: 1.45;
+  line-height: 1.55;
 }
 
 .opensource-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(24rem, 1.08fr);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: clamp(1.25rem, 3.2vw, 2.4rem);
   align-items: center;
   border: 1px solid rgba(94, 234, 212, 0.18);
-  border-radius: 1.75rem;
+  border-radius: 1.55rem;
   background:
     radial-gradient(circle at top left, rgba(45, 212, 191, 0.16), transparent 18rem),
     rgba(15, 23, 42, 0.72);
-  padding: clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1.25rem, 3.4vw, 2.1rem);
   box-shadow: 0 26px 90px rgba(0, 0, 0, 0.22);
 }
 
 .opensource-credit {
-  margin-top: 1.1rem;
+  margin-top: 0.95rem;
   color: #cbd5e1;
-  font-size: 0.94rem;
+  font-size: 0.9rem;
   line-height: 1.7;
 }
 
 .opensource-card {
-  border-radius: 1.35rem;
-  padding: clamp(1.1rem, 2vw, 1.5rem);
+  border-radius: 1.2rem;
+  padding: clamp(1rem, 1.7vw, 1.28rem);
 }
 
 .opensource-code {
@@ -1809,39 +1813,39 @@ body {
 
 .opensource-code span {
   color: #94a3b8;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 850;
 }
 
 .opensource-code code {
   color: #99f6e4;
   font-family: "Courier New", Courier, monospace;
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   overflow-wrap: anywhere;
 }
 
 .opensource-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
-  margin-top: 1rem;
+  gap: 0.58rem;
+  margin-top: 0.85rem;
 }
 
 .final-cta-section {
-  padding-bottom: clamp(3.25rem, 7vw, 6rem);
+  padding-bottom: clamp(2.75rem, 6vw, 5rem);
 }
 
 .final-cta-card {
   position: relative;
   overflow: hidden;
-  max-width: 58rem;
+  max-width: 54rem;
   margin: 0 auto;
   border: 1px solid rgba(94, 234, 212, 0.18);
-  border-radius: 1.85rem;
+  border-radius: 1.6rem;
   background:
     radial-gradient(circle at top, rgba(45, 212, 191, 0.18), transparent 20rem),
     linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045));
-  padding: clamp(1.6rem, 4vw, 2.75rem);
+  padding: clamp(1.35rem, 3.4vw, 2.25rem);
   text-align: center;
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.26);
 }
@@ -1851,22 +1855,22 @@ body {
 }
 
 .final-cta-title {
-  max-width: 45rem;
-  margin: 1rem auto 0;
+  max-width: 41rem;
+  margin: 0.85rem auto 0;
   color: #ffffff;
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
   font-weight: 900;
-  line-height: 1.04;
-  letter-spacing: -0.05em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
   text-wrap: balance;
 }
 
 .final-cta-description {
-  max-width: 43rem;
-  margin: 1rem auto 0;
+  max-width: 40rem;
+  margin: 0.85rem auto 0;
   color: #cbd5e1;
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.7;
 }
 
 .final-cta-actions {
@@ -2005,12 +2009,23 @@ body {
   }
 
   .home-hero {
-    padding-top: 2.6rem;
+    padding-top: 2.25rem;
+    padding-bottom: 2.5rem;
   }
 
   .hero-title {
-    font-size: clamp(2.45rem, 13vw, 3.5rem);
-    line-height: 0.99;
+    font-size: clamp(2.15rem, 10.5vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+  }
+
+  .hero-subtitle {
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  .hero-package-line {
+    font-size: 0.92rem;
   }
 
   .hero-actions > *,
@@ -2023,27 +2038,47 @@ body {
   }
 
   .workflow-graph {
-    height: 22rem;
+    height: 19.5rem;
   }
 
   .graph-core {
-    width: 7rem;
-    height: 7rem;
+    width: 6.3rem;
+    height: 6.3rem;
   }
 
   .graph-ring-one {
-    width: 14rem;
-    height: 14rem;
+    width: 12.8rem;
+    height: 12.8rem;
   }
 
   .graph-ring-two {
-    width: 19rem;
-    height: 19rem;
+    width: 17.6rem;
+    height: 17.6rem;
   }
 
   .graph-node {
-    font-size: 0.68rem;
-    padding: 0.48rem 0.58rem;
+    font-size: 0.66rem;
+    padding: 0.42rem 0.5rem;
+  }
+
+  .home-section {
+    padding: 2.55rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 1.35rem;
+  }
+
+  .section-title,
+  .final-cta-title {
+    font-size: clamp(1.62rem, 8vw, 2.2rem);
+    line-height: 1.1;
+  }
+
+  .section-description,
+  .final-cta-description {
+    font-size: 0.95rem;
+    line-height: 1.66;
   }
 
   .workflow-card-grid,
@@ -2082,7 +2117,7 @@ body {
   }
 
   .workflow-graph {
-    height: 20rem;
+    height: 18rem;
   }
 
   .node-input {
