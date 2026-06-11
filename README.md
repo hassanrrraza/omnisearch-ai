@@ -52,6 +52,12 @@ distinct discovery channels that most creators ignore:
 
 > **There is no other open-source tool that handles all four together.**
 
+### Product Screenshots
+
+| | | | |
+| :---: | :---: | :---: | :---: |
+| <img src="public/images/1.webp" alt="OmniSearch AI product screenshot 1" width="720"> | <img src="public/images/2.webp" alt="OmniSearch AI product screenshot 2" width="720"> | <img src="public/images/3.webp" alt="OmniSearch AI product screenshot 3" width="720"> | <img src="public/images/4.webp" alt="OmniSearch AI product screenshot 4" width="720"> |
+
 ---
 
 ## Features
