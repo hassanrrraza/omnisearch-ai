@@ -13,10 +13,11 @@ interface OptimizeOutputPreviewProps {
 }
 
 const tabs = [
-  "Optimized Blog",
+  "Blog",
   "What Changed",
   "Metadata",
-  "FAQ + Snippet",
+  "FAQ",
+  "Schema",
   "Report",
 ];
 const loadingMessages = [
@@ -65,10 +66,11 @@ export function OptimizeOutputPreview({
           <path d="M14 3v5h5M9 13h6M9 17h6" />
         </svg>
         <h2 className="mt-4 text-lg font-semibold text-neutral-950">
-          Your optimized blog will appear here.
+          Your optimized blog package will appear here.
         </h2>
-        <p className="mt-2 text-sm text-neutral-500">
-          Paste an article and click Optimize to create the upgraded version.
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-neutral-500">
+          Paste an existing article and OmniSearch AI will return an optimized
+          version with metadata, schema, FAQ, and scoring.
         </p>
       </CenteredState>
     );
@@ -109,15 +111,15 @@ export function OptimizeOutputPreview({
       <ScoreCards score={data.score} />
       <ExportButtons data={data} title={data.title} />
 
-      <div className="rounded-lg border border-neutral-200 bg-white">
-        <div className="border-b border-neutral-200 px-5 pt-4">
-          <div className="flex gap-5 overflow-x-auto">
+      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="border-b border-slate-200 px-4 pt-4 sm:px-5">
+          <div className="flex gap-2 overflow-x-auto pb-px">
             {tabs.map((tab, index) => (
               <button
-                className={`whitespace-nowrap border-b-2 px-1 pb-3 text-sm transition ${
+                className={`whitespace-nowrap rounded-t-lg border-b-2 px-3 py-2 text-sm transition ${
                   activeTab === index
-                    ? "border-neutral-900 font-medium text-neutral-900"
-                    : "border-transparent text-neutral-500 hover:text-neutral-700"
+                    ? "border-teal-500 bg-teal-50 font-semibold text-teal-800"
+                    : "border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800"
                 }`}
                 key={tab}
                 onClick={() => setActiveTab(index)}
@@ -129,7 +131,7 @@ export function OptimizeOutputPreview({
           </div>
         </div>
 
-        <div className="p-5">
+        <div className="min-w-0 p-4 sm:p-5">
           {activeTab === 0 ? (
             <div className="prose prose-neutral max-w-none">
               <ReactMarkdown>{data.optimizedBlogMarkdown}</ReactMarkdown>
@@ -152,7 +154,9 @@ export function OptimizeOutputPreview({
             <FaqTab data={data} onToggle={setOpenFaq} openFaq={openFaq} />
           ) : null}
 
-          {activeTab === 4 ? <ReportTab data={data} /> : null}
+          {activeTab === 4 ? <SchemaTab data={data} /> : null}
+
+          {activeTab === 5 ? <ReportTab data={data} /> : null}
         </div>
       </div>
     </section>
@@ -313,14 +317,9 @@ function FaqTab({
   );
 }
 
-function ReportTab({ data }: { data: OptimizeOutput }) {
+function SchemaTab({ data }: { data: OptimizeOutput }) {
   return (
     <div className="space-y-5">
-      <ReportSection items={data.optimizationReport.seo} label="SEO" />
-      <ReportSection items={data.optimizationReport.aeo} label="AEO" />
-      <ReportSection items={data.optimizationReport.geo} label="GEO" />
-      <ReportSection items={data.optimizationReport.llm} label="LLM" />
-
       <div className="rounded-lg bg-neutral-50 p-4">
         <p className="text-sm font-medium text-neutral-950">LLM Summary</p>
         <p className="mt-2 text-sm leading-6 text-neutral-700">
@@ -339,6 +338,17 @@ function ReportTab({ data }: { data: OptimizeOutput }) {
           <code>{JSON.stringify(data.schemaJsonLd, null, 2)}</code>
         </pre>
       </div>
+    </div>
+  );
+}
+
+function ReportTab({ data }: { data: OptimizeOutput }) {
+  return (
+    <div className="space-y-5">
+      <ReportSection items={data.optimizationReport.seo} label="SEO" />
+      <ReportSection items={data.optimizationReport.aeo} label="AEO" />
+      <ReportSection items={data.optimizationReport.geo} label="GEO" />
+      <ReportSection items={data.optimizationReport.llm} label="LLM" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { ExportButtons, ScoreCards } from "@/components/PreviewActions";
 import { SerpPreview } from "@/components/SerpPreview";
@@ -11,11 +11,34 @@ interface OutputPreviewProps {
   loading: boolean;
 }
 
-const tabs = ["Blog", "Metadata", "FAQ + Snippet", "LLM + Schema"];
+const tabs = ["Blog", "Metadata", "FAQ", "Schema", "Report"];
+const loadingMessages = [
+  "Understanding your blog idea...",
+  "Mapping search intent and content structure...",
+  "Optimizing for SEO, AEO, GEO, and LLM visibility...",
+  "Generating metadata, FAQ, schema, and scores...",
+  "Finalizing your blog package...",
+];
 
 export function OutputPreview({ data, loading }: OutputPreviewProps) {
   const [activeTab, setActiveTab] = useState(0);
   const [openFaq, setOpenFaq] = useState(0);
+  const [loadingMessageIndex, setLoadingMessageIndex] = useState(0);
+  const loadingMessage = loadingMessages[loadingMessageIndex];
+
+  useEffect(() => {
+    if (!loading) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingMessageIndex(
+        (current) => (current + 1) % loadingMessages.length
+      );
+    }, 4000);
+
+    return () => window.clearInterval(interval);
+  }, [loading]);
 
   if (!data && !loading) {
     return (
@@ -31,10 +54,11 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
           <path d="M12 8.5 13.1 11l2.4 1-2.4 1-1.1 2.5L10.9 13l-2.4-1 2.4-1L12 8.5z" />
         </svg>
         <h2 className="mt-4 text-lg font-semibold text-neutral-950">
-          Your blog will appear here
+          Your optimized blog package will appear here.
         </h2>
-        <p className="mt-2 text-sm text-neutral-500">
-          Fill in the form and click Generate to create your optimized blog.
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-neutral-500">
+          Fill in your blog details and generate a complete SEO/AEO/GEO-ready
+          content package.
         </p>
       </CenteredState>
     );
@@ -55,11 +79,11 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
           </div>
         </div>
         <h2 className="mt-6 text-lg font-semibold text-neutral-950">
-          Generating your optimized blog...
+          {loadingMessage}
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-neutral-500">
-          This takes 15-30 seconds. Gemini is applying SEO, AEO, GEO, and LLM
-          optimization rules.
+          Gemini is preparing the blog, metadata, FAQ, Schema JSON-LD, and
+          score report.
         </p>
       </CenteredState>
     );
@@ -74,15 +98,15 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
       <ScoreCards score={data.score} />
       <ExportButtons data={data} title={data.title} />
 
-      <div className="rounded-lg border border-neutral-200 bg-white">
-        <div className="border-b border-neutral-200 px-5 pt-4">
-          <div className="flex gap-5 overflow-x-auto">
+      <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div className="border-b border-slate-200 px-4 pt-4 sm:px-5">
+          <div className="flex gap-2 overflow-x-auto pb-px">
             {tabs.map((tab, index) => (
               <button
-                className={`whitespace-nowrap border-b-2 px-1 pb-3 text-sm transition ${
+                className={`whitespace-nowrap rounded-t-lg border-b-2 px-3 py-2 text-sm transition ${
                   activeTab === index
-                    ? "border-neutral-900 font-medium text-neutral-900"
-                    : "border-transparent text-neutral-500 hover:text-neutral-700"
+                    ? "border-teal-500 bg-teal-50 font-semibold text-teal-800"
+                    : "border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800"
                 }`}
                 key={tab}
                 onClick={() => setActiveTab(index)}
@@ -94,9 +118,9 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
           </div>
         </div>
 
-        <div className="p-5">
+        <div className="min-w-0 p-4 sm:p-5">
           {activeTab === 0 ? (
-            <div className="prose prose-neutral max-w-none">
+            <div className="prose prose-neutral max-w-none rounded-xl border border-slate-100 bg-white p-1">
               <ReactMarkdown>{data.blogMarkdown}</ReactMarkdown>
             </div>
           ) : null}
@@ -107,7 +131,9 @@ export function OutputPreview({ data, loading }: OutputPreviewProps) {
             <FaqTab data={data} onToggle={setOpenFaq} openFaq={openFaq} />
           ) : null}
 
-          {activeTab === 3 ? <LlmSchemaTab data={data} /> : null}
+          {activeTab === 3 ? <SchemaTab data={data} /> : null}
+
+          {activeTab === 4 ? <ReportTab data={data} /> : null}
         </div>
       </div>
     </section>
@@ -197,11 +223,9 @@ function FaqTab({
   );
 }
 
-function LlmSchemaTab({ data }: { data: BlogOutput }) {
+function SchemaTab({ data }: { data: BlogOutput }) {
   return (
     <div className="space-y-5">
-      <OptimizationReportPanel data={data} />
-
       <div className="rounded-lg bg-neutral-50 p-4">
         <p className="text-sm font-medium text-neutral-950">LLM Summary</p>
         <p className="mt-2 text-sm leading-6 text-neutral-700">
@@ -224,7 +248,7 @@ function LlmSchemaTab({ data }: { data: BlogOutput }) {
   );
 }
 
-function OptimizationReportPanel({ data }: { data: BlogOutput }) {
+function ReportTab({ data }: { data: BlogOutput }) {
   return (
     <div className="grid gap-3">
       <ReportSection items={data.optimizationReport.seo} label="SEO" />
