@@ -10,7 +10,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export function getGeminiModel() {
   return genAI.getGenerativeModel({
-    model: process.env.GEMINI_MODEL ?? "gemini-2.0-flash",
+    model: process.env.GEMINI_MODEL ?? "gemini-2.5-flash",
     generationConfig: {
       temperature: 0.2,
       responseMimeType: "application/json",
