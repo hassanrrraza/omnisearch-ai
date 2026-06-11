@@ -57,19 +57,38 @@ const differentiators = [
   },
 ];
 
-const packageItems = [
-  "Optimized Blog Markdown",
-  "SEO Title",
-  "Meta Description",
-  "URL Slug",
-  "SERP Preview",
-  "FAQ Section",
-  "Featured Snippet",
-  "Schema JSON-LD",
-  "LLM Summary",
-  "SEO/AEO/GEO/LLM Scores",
-  "Optimization Report",
-  "Export Buttons",
+const packageGroups = [
+  {
+    title: "Content Assets",
+    items: [
+      "Optimized Blog Markdown",
+      "Featured Snippet",
+      "LLM Summary",
+      "FAQ Section",
+    ],
+  },
+  {
+    title: "Search Metadata",
+    items: ["SEO Title", "Meta Description", "URL Slug", "SERP Preview"],
+  },
+  {
+    title: "Publishing Toolkit",
+    items: [
+      "Schema JSON-LD",
+      "SEO/AEO/GEO/LLM Scores",
+      "Optimization Report",
+      "Export Buttons",
+    ],
+  },
+];
+
+const openSourceCapabilities = [
+  "Bring your own Gemini API key",
+  "Customize the optimization guides",
+  "Improve or replace the prompts",
+  "Run the app locally",
+  "Extend the export workflow",
+  "Adapt it for your CMS or content stack",
 ];
 
 export default function Home() {
@@ -424,42 +443,68 @@ function DifferentSection() {
 
 function OutputPackageSection() {
   return (
-    <SectionShell
-      eyebrow="Output package"
-      title="Everything you need to move from draft to publishing workflow."
-      description="Each successful run returns structured content and publishing assets that are easy to review, copy, download, or adapt."
-    >
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {packageItems.map((item) => (
-          <div
-            className="rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-medium text-slate-200"
-            key={item}
+    <section className="py-12 sm:py-16 lg:py-20">
+      <div className="mb-6 max-w-3xl sm:mb-10">
+        <p className="text-xs font-extrabold uppercase tracking-wide text-teal-200">
+          Output package
+        </p>
+        <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+          Everything you need to review, publish, and reuse your content.
+        </h2>
+        <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+          Each run returns a structured content package - not just a draft.
+          Review the article, copy metadata, inspect schema, check scores, and
+          export files for your website, CMS, or developer workflow.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {packageGroups.map((group) => (
+          <article
+            className="rounded-3xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/20 sm:p-6"
+            key={group.title}
           >
-            {item}
-          </div>
+            <h3 className="text-xl font-extrabold tracking-tight text-white">
+              {group.title}
+            </h3>
+            <ul className="mt-5 grid gap-3">
+              {group.items.map((item) => (
+                <li
+                  className="flex items-center gap-3 text-sm font-medium leading-6 text-slate-200"
+                  key={item}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300"
+                  />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
         ))}
       </div>
-    </SectionShell>
+    </section>
   );
 }
 
 function OpenSourceSection() {
   return (
-    <section className="my-20 rounded-[1.5rem] border border-teal-300/20 bg-teal-300/10 p-6 sm:p-8 lg:p-10">
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div>
-          <p className="text-sm font-semibold uppercase text-teal-200">
-            Open-source and local-first
+    <section className="py-12 sm:py-16 lg:py-20">
+      <div className="grid gap-8 rounded-3xl border border-teal-300/20 bg-teal-300/10 p-5 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:p-10">
+        <div className="max-w-3xl">
+          <p className="text-xs font-extrabold uppercase tracking-wide text-teal-200">
+            Open-source & local-first
           </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            More control over your content optimization workflow.
+          <h2 className="mt-3 max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+            Own the workflow instead of renting a black box.
           </h2>
-          <p className="mt-4 text-base leading-8 text-slate-300">
-            Open-sourced for builders, creators, founders, and marketers who
-            want a transparent workflow they can inspect, run locally, and
-            extend for their own publishing systems.
+          <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300">
+            OmniSearch AI is open-sourced for builders, creators, founders, and
+            marketers who want a transparent content optimization system they
+            can inspect, run locally, customize, and extend.
           </p>
-          <p className="mt-4 text-sm leading-7 text-slate-300">
+          <p className="mt-5 text-sm leading-7 text-slate-300">
             Developed and open-sourced by{" "}
             <a
               className="font-semibold text-teal-100 underline underline-offset-4 transition hover:text-white"
@@ -472,22 +517,28 @@ function OpenSourceSection() {
             .
           </p>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {[
-            "Bring your own Gemini API key",
-            "Customize the guides",
-            "Improve the prompts",
-            "Run it locally",
-            "Extend the export workflow",
-            "Adapt it for your CMS",
-          ].map((item) => (
-            <div
-              className="rounded-xl border border-white/10 bg-slate-950/40 p-4 text-sm font-medium text-slate-200"
-              key={item}
-            >
-              {item}
-            </div>
-          ))}
+
+        <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-4 shadow-2xl shadow-black/20 sm:p-5">
+          <div className="grid gap-2 rounded-2xl border border-white/10 bg-slate-950/80 p-4">
+            <span className="text-xs font-bold text-slate-400">.env.local</span>
+            <code className="break-words font-mono text-sm text-teal-200">
+              GEMINI_API_KEY=your_key_here
+            </code>
+          </div>
+          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+            {openSourceCapabilities.map((item) => (
+              <li
+                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.045] px-3 py-2.5 text-sm font-medium leading-5 text-slate-200"
+                key={item}
+              >
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -496,51 +547,22 @@ function OpenSourceSection() {
 
 function FinalCta() {
   return (
-    <section className="mb-16 rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-6 text-center sm:p-10">
-      <p className="text-sm font-semibold uppercase text-teal-200">
-        Ready to build a content package?
-      </p>
-      <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-bold tracking-tight text-white sm:text-4xl">
-        Start with a topic or paste an existing article.
-      </h2>
-      <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-slate-300">
-        OmniSearch AI will turn it into a structured content package built for
-        search engines and AI discovery.
-      </p>
-      <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <PrimaryLink href="/new-blog">Create New Blog</PrimaryLink>
-        <SecondaryLink href="/optimize-blog">Optimize Existing Blog</SecondaryLink>
-        <GhostLink href={githubUrl}>View on GitHub</GhostLink>
-      </div>
-    </section>
-  );
-}
-
-function SectionShell({
-  children,
-  description,
-  eyebrow,
-  title,
-}: {
-  children: React.ReactNode;
-  description: string;
-  eyebrow: string;
-  title: string;
-}) {
-  return (
-    <section className="py-16 sm:py-20">
-      <div className="mb-8 max-w-3xl">
-        <p className="text-sm font-semibold uppercase text-teal-200">
-          {eyebrow}
-        </p>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          {title}
+    <section className="py-12 pb-16 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-5xl rounded-3xl border border-teal-300/20 bg-white/[0.07] p-6 text-center shadow-2xl shadow-black/25 sm:p-10">
+        <h2 className="mx-auto max-w-3xl text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+          Ready to build a search-ready content package?
         </h2>
-        <p className="mt-4 text-base leading-8 text-slate-300">
-          {description}
+        <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-slate-300">
+          Start with a topic or paste an existing article. OmniSearch AI will
+          turn your input into a structured content package built for search
+          engines, answer engines, and AI discovery.
         </p>
+        <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+          <PrimaryLink href="/new-blog">Start New Blog</PrimaryLink>
+          <SecondaryLink href="/optimize-blog">Optimize Existing Blog</SecondaryLink>
+          <GhostLink href={githubUrl}>GitHub</GhostLink>
+        </div>
       </div>
-      {children}
     </section>
   );
 }
