@@ -1,9 +1,21 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { JsonLd } from "@/components/JsonLd";
 import { homeFaqItems } from "@/lib/seo/faq";
 import { homePageJsonLd } from "@/lib/seo/json-ld";
 import { createPageMetadata } from "@/lib/seo/metadata";
+import "./home.css";
+
+const HeroWorkflowVisual = dynamic(
+  () =>
+    import("@/components/landing/HeroWorkflowVisual").then(
+      (mod) => mod.HeroWorkflowVisual
+    ),
+  {
+    loading: () => <div className="hero-visual-skeleton" aria-hidden="true" />,
+  }
+);
 
 export const metadata = createPageMetadata({
   path: "/",
@@ -11,25 +23,6 @@ export const metadata = createPageMetadata({
 
 const githubUrl = "https://github.com/hassanrrraza/omnisearch-ai";
 const hassanUrl = "https://hassanr.com/";
-
-const heroStages = [
-  "Analyzing context",
-  "Mapping search intent",
-  "Applying SEO/AEO/GEO/LLM loops",
-  "Generating schema and FAQ",
-  "Scoring content package",
-  "Export ready",
-];
-
-const workflowNodes = [
-  { className: "node-input", label: "Input Context" },
-  { className: "node-seo", label: "SEO Loop" },
-  { className: "node-aeo", label: "AEO Loop" },
-  { className: "node-geo", label: "GEO Loop" },
-  { className: "node-llm", label: "LLM Loop" },
-  { className: "node-package", label: "Content Package" },
-  { className: "node-export", label: "Export" },
-];
 
 const workflowChoices = [
   {
@@ -163,7 +156,9 @@ export default function Home() {
       </div>
 
       <div className="home-shell">
-        <Header />
+        <div className="home-header-bar">
+          <Header />
+        </div>
         <Hero />
         <FeatureNavigation />
         <WorkflowSection />
@@ -235,45 +230,6 @@ function Hero() {
 
       <HeroWorkflowVisual />
     </section>
-  );
-}
-
-function HeroWorkflowVisual() {
-  return (
-    <div className="hero-visual-card" aria-label="Animated workflow preview">
-      <div className="hero-visual-top">
-        <div>
-          <p className="visual-kicker">Workflow engine</p>
-          <h2>From raw context to publish-ready content.</h2>
-        </div>
-        <span>Gemini powered</span>
-      </div>
-
-      <div className="workflow-graph" aria-hidden="true">
-        <div className="graph-core">
-          <span>Omni</span>
-          <strong>Search</strong>
-        </div>
-        <div className="graph-ring graph-ring-one" />
-        <div className="graph-ring graph-ring-two" />
-        {workflowNodes.map((node) => (
-          <div className={`graph-node ${node.className}`} key={node.label}>
-            {node.label}
-          </div>
-        ))}
-        <div className="graph-path graph-path-one" />
-        <div className="graph-path graph-path-two" />
-      </div>
-
-      <div className="workflow-console">
-        {heroStages.map((stage, index) => (
-          <p key={stage} style={{ "--stage-index": index } as CSSProperties}>
-            <span />
-            {stage}
-          </p>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -493,11 +449,11 @@ function FaqSection() {
       />
 
       <div className="faq-list">
-        {homeFaqItems.map((item) => (
-          <article className="faq-item" key={item.question}>
-            <h3 className="faq-question">{item.question}</h3>
+        {homeFaqItems.map((item, index) => (
+          <details className="faq-item" key={item.question} open={index === 0}>
+            <summary className="faq-question">{item.question}</summary>
             <p className="faq-answer">{item.answer}</p>
-          </article>
+          </details>
         ))}
       </div>
     </section>
