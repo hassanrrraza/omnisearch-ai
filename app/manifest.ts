@@ -1,15 +1,17 @@
 import type { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/seo/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "OmniSearch AI",
-    short_name: "OmniSearch AI",
-    description:
-      "Generate SEO, AEO, GEO, and LLM-optimized blog posts with Gemini.",
+    name: siteConfig.name,
+    short_name: siteConfig.name,
+    description: siteConfig.shortDescription,
     start_url: "/",
     display: "standalone",
     background_color: "#f6f7f9",
     theme_color: "#064e3b",
+    categories: ["productivity", "utilities"],
+    lang: "en-US",
     icons: [
       {
         src: "/images/favicon/android-chrome-192x192.png",

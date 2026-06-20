@@ -1,5 +1,13 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
+import { JsonLd } from "@/components/JsonLd";
+import { homeFaqItems } from "@/lib/seo/faq";
+import { homePageJsonLd } from "@/lib/seo/json-ld";
+import { createPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata = createPageMetadata({
+  path: "/",
+});
 
 const githubUrl = "https://github.com/hassanrrraza/omnisearch-ai";
 const hassanUrl = "https://hassanr.com/";
@@ -147,6 +155,7 @@ const openSourceCapabilities = [
 export default function Home() {
   return (
     <main className="home-page">
+      <JsonLd data={homePageJsonLd(homeFaqItems)} />
       <div className="home-background" aria-hidden="true">
         <div className="home-orb home-orb-one" />
         <div className="home-orb home-orb-two" />
@@ -161,7 +170,9 @@ export default function Home() {
         <DifferentSection />
         <OutputPackageSection />
         <OpenSourceSection />
+        <FaqSection />
         <FinalCta />
+        <SiteFooter />
       </div>
     </main>
   );
@@ -180,6 +191,7 @@ function Header() {
       <nav className="home-nav" aria-label="Homepage navigation">
         <NavLink href="/new-blog">Start New Blog</NavLink>
         <NavLink href="/optimize-blog">Optimize Existing Blog</NavLink>
+        <NavLink href="/#faq">FAQ</NavLink>
         <a className="nav-link" href={githubUrl} rel="noreferrer" target="_blank">
           GitHub
         </a>
@@ -468,6 +480,80 @@ function FinalCta() {
         </div>
       </div>
     </section>
+  );
+}
+
+function FaqSection() {
+  return (
+    <section className="home-section faq-section" id="faq">
+      <SectionHeader
+        eyebrow="FAQ"
+        title="Common questions about OmniSearch AI"
+        description="Answers to the questions creators, marketers, and developers ask before using an open-source SEO, AEO, GEO, and LLM optimization workflow."
+      />
+
+      <div className="faq-list">
+        {homeFaqItems.map((item) => (
+          <article className="faq-item" key={item.question}>
+            <h3 className="faq-question">{item.question}</h3>
+            <p className="faq-answer">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="site-footer-grid">
+        <div>
+          <p className="site-footer-brand">OmniSearch AI</p>
+          <p className="site-footer-copy">
+            Open-source engine for SEO, AEO, GEO, and LLM content optimization.
+          </p>
+        </div>
+
+        <nav aria-label="Footer navigation">
+          <p className="site-footer-heading">Product</p>
+          <ul className="site-footer-links">
+            <li>
+              <Link href="/new-blog">Create New Blog</Link>
+            </li>
+            <li>
+              <Link href="/optimize-blog">Optimize Existing Blog</Link>
+            </li>
+            <li>
+              <Link href="/#faq">FAQ</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <nav aria-label="Project links">
+          <p className="site-footer-heading">Project</p>
+          <ul className="site-footer-links">
+            <li>
+              <a href={githubUrl} rel="noreferrer" target="_blank">
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href={hassanUrl} rel="noreferrer" target="_blank">
+                Maintainer
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <p className="site-footer-meta">
+        MIT License · Built and maintained by{" "}
+        <a href={hassanUrl} rel="noreferrer" target="_blank">
+          Hassan Raza
+        </a>
+      </p>
+    </footer>
   );
 }
 
