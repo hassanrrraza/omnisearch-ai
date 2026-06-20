@@ -2312,3 +2312,104 @@ body {
     right: 8%;
   }
 }
+
+.faq-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.15rem 1.25rem;
+}
+
+.faq-question {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.faq-answer {
+  margin-top: 0.65rem;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.site-footer {
+  position: relative;
+  margin-top: 1rem;
+  padding: clamp(2rem, 4vw, 3rem) 0 clamp(2.5rem, 5vw, 3.5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-footer-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.site-footer-brand {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.site-footer-copy {
+  max-width: 22rem;
+  margin-top: 0.55rem;
+  color: #94a3b8;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.site-footer-heading {
+  color: #e2e8f0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer-links {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer-links a {
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.site-footer-links a:hover {
+  color: #5eead4;
+}
+
+.site-footer-meta {
+  margin-top: 1.75rem;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.site-footer-meta a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.site-footer-meta a:hover {
+  color: #5eead4;
+}
+
+@media (min-width: 768px) {
+  .site-footer-grid {
+    grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 0.8fr));
+    align-items: start;
+  }
+}
