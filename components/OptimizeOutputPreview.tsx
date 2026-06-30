@@ -1,7 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
+
+const ReactMarkdown = dynamic(() => import("react-markdown"), {
+  loading: () => <div className="animate-pulse h-32 w-full bg-slate-100 rounded-lg"></div>,
+  ssr: false,
+});
 import { ExportButtons, ScoreCards } from "@/components/PreviewActions";
 import { SerpPreview } from "@/components/SerpPreview";
 import type { OptimizeOutput } from "@/lib/schemas/optimize-output-schema";
