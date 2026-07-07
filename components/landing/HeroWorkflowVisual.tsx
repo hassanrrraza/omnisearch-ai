@@ -49,7 +49,7 @@ export function HeroWorkflowVisual() {
       <div className="workflow-console">
         {heroStages.map((stage, index) => (
           <p key={stage} style={{ "--stage-index": index } as CSSProperties}>
-            <span />
+            <span aria-hidden="true" />
             {stage}
           </p>
         ))}
